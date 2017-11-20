@@ -1,0 +1,44 @@
+﻿<Window x:Class="HolidayMailer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayMailer"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="456.999" Width="634">
+    <Grid Margin="0,0,2,3">
+
+        <Menu x:Name="menu" Height="19" VerticalAlignment="Top">
+            <MenuItem Header="File" AllowDrop="True">
+                <MenuItem Name="menu_item_exit" Header="Exit" Click="menu_item_exit_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Contacts">
+                <MenuItem Name="menu_item_new_contact" Header="New Contact..." Click="menu_item_new_contact_Click"></MenuItem>
+                <MenuItem Name="menu_item_edit_contact" Header="Edit Contacts..." Click="menu_item_edit_contact_Click"></MenuItem>
+            </MenuItem>
+            <MenuItem Header="Mailing Lists">
+                <MenuItem Name="menu_item_new_list" Header="New List..." Click="menu_item_new_list_Click"></MenuItem>
+                <MenuItem Name="menu_item_edit_list" Header="Edit Selected List..." Click="menu_item_edit_list_Click"></MenuItem>
+                <MenuItem Name="menu_item_remove_list" Header="Remove Lists..." Click="menu_item_remove_list_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <TabControl Margin="10,24,10,10">
+            <TabItem Header="Contacts" Cursor="Hand">
+                <Grid x:Name="tab_grid_contacts" Background="#FFE5E5E5">
+                    <TextBox x:Name="textBox_filter" HorizontalAlignment="Left" Height="23" Margin="263,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
+                    <Button x:Name="button_filter" Content="Search By Last Name" Margin="451,10,0,0" VerticalAlignment="Top" Height="23" Click="button_filter_Click" ToolTip="Enter a search string to filter the contact list. Note: Only searches against last names at this time." HorizontalAlignment="Left" Width="138"/>
+                    <DataGrid x:Name="dataGrid_contacts" Margin="90,38,10,10"/>
+                    <Button x:Name="button_new_contact" Content="New..." HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="75" Click="button_new_contact_Click" ToolTip="Create a new Contact. Opens a dialog."/>
+                    <Button x:Name="button_edit_contact" Content="Edit..." HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75" Click="button_edit_contact_Click" ToolTip="Opens a dialog allowing you to edit any of your contacts."/>
+                    <Button x:Name="button_remove_contact" Content="Remove..." HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75" Click="button_remove_contact_Click" ToolTip="Opens a dialog allowing you to remove any of your contacts."/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Mailing List">
+                <Grid x:Name="tab_grid_mailinglist" Background="#FFE5E5E5">
+                    <Button x:Name="button_send_to" Content="Send..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button_send_to_Click" ToolTip="Send mail to each contact in the currently selected list. Opens a dialog."/>
+                    <ListBox x:Name="listBox_mailing_list" Margin="90,10,10,10" ToolTip="A list of all your current mailing lists. To create, remove, or edit a list see the 'Mailing Lists' menu."/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>

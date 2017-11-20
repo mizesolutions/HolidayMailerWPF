@@ -1,0 +1,15 @@
+﻿<Window x:Class="HolidayMailer.RemoveListWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HolidayMailer"
+        mc:Ignorable="d"
+        Title="RemoveListWindow" Height="367.521" Width="538.738">
+    <Grid>
+        <ListBox x:Name="listBox_mailingLists" Height="201" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="511"/>
+        <Button x:Name="button_remove" Content="Remove" Margin="224,216,0,0" VerticalAlignment="Top" Click="button_remove_Click" HorizontalAlignment="Left" Width="77"/>
+        <Button x:Name="button_cancel" Content="Exit" Margin="224,292,0,0" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Left" Width="77"/>
+
+    </Grid>
+</Window>
