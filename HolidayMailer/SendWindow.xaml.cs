@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-
+using System.Windows.Navigation;
 
 namespace HolidayMailer {
     /// <summary>
@@ -28,12 +29,29 @@ namespace HolidayMailer {
 
         public SendWindow(List<string> recipients) {
             InitializeComponent();
+            CenterWindowOnScreen();
             emailRecipients = recipients;
             string temp = "";
             foreach (string email in emailRecipients) {
                 temp += email + ", ";
             }
             textBox_to.Text = temp.Substring(0, temp.Length - 2);
+        }
+
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
+        }
+
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
         private void SendMessages() {

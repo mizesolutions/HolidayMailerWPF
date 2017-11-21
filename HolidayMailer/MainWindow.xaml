@@ -5,38 +5,104 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="456.999" Width="634">
-    <Grid Margin="0,0,2,3">
+        Title="MainWindow" Height="475" Width="675" MinHeight="475" MinWidth="675" MaxHeight="1475" MaxWidth="1675">
+    <Grid Margin="0,0,0,0">
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                <GradientStop Color="#FF8BBECF"/>
+            </LinearGradientBrush>
+        </Grid.Background>
 
-        <Menu x:Name="menu" Height="19" VerticalAlignment="Top">
-            <MenuItem Header="File" AllowDrop="True">
+        <Menu x:Name="menu" Height="19" VerticalAlignment="Top" Background="#FFCDCDCD">
+            <Menu.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
+            </Menu.Effect>
+            <MenuItem x:Name="menu_File" Header="File" AllowDrop="True">
                 <MenuItem Name="menu_item_exit" Header="Exit" Click="menu_item_exit_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Contacts">
-                <MenuItem Name="menu_item_new_contact" Header="New Contact..." Click="menu_item_new_contact_Click"></MenuItem>
-                <MenuItem Name="menu_item_edit_contact" Header="Edit Contacts..." Click="menu_item_edit_contact_Click"></MenuItem>
+            <MenuItem x:Name="menu_Contacts" Header="Contacts" >
+                <MenuItem Name="menu_item_new_contact" Header="New Contact" MouseEnter="menu_item_new_contact_MouseEnter" Click="menu_item_new_contact_Click"></MenuItem>
+                <MenuItem Name="menu_item_edit_contact" Header="Edit Contacts" MouseEnter="menu_item_edit_contact_MouseEnter" Click="menu_item_edit_contact_Click"></MenuItem>
             </MenuItem>
-            <MenuItem Header="Mailing Lists">
-                <MenuItem Name="menu_item_new_list" Header="New List..." Click="menu_item_new_list_Click"></MenuItem>
-                <MenuItem Name="menu_item_edit_list" Header="Edit Selected List..." Click="menu_item_edit_list_Click"></MenuItem>
-                <MenuItem Name="menu_item_remove_list" Header="Remove Lists..." Click="menu_item_remove_list_Click"></MenuItem>
+            <MenuItem x:Name="menu_MailingLists" Header="Mailing Lists" >
+                <MenuItem Name="menu_item_new_list" Header="New List" Click="menu_item_new_list_Click"></MenuItem>
+                <MenuItem Name="menu_item_edit_list" Header="Edit Selected List" MouseEnter="menu_item_edit_list_MouseEnter" Click="menu_item_edit_list_Click"></MenuItem>
+                <MenuItem Name="menu_item_remove_list" Header="Remove Lists" Click="menu_item_remove_list_Click"></MenuItem>
             </MenuItem>
         </Menu>
-        <TabControl Margin="10,24,10,10">
-            <TabItem Header="Contacts" Cursor="Hand">
-                <Grid x:Name="tab_grid_contacts" Background="#FFE5E5E5">
-                    <TextBox x:Name="textBox_filter" HorizontalAlignment="Left" Height="23" Margin="263,10,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="183"/>
-                    <Button x:Name="button_filter" Content="Search By Last Name" Margin="451,10,0,0" VerticalAlignment="Top" Height="23" Click="button_filter_Click" ToolTip="Enter a search string to filter the contact list. Note: Only searches against last names at this time." HorizontalAlignment="Left" Width="138"/>
-                    <DataGrid x:Name="dataGrid_contacts" Margin="90,38,10,10"/>
-                    <Button x:Name="button_new_contact" Content="New..." HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="75" Click="button_new_contact_Click" ToolTip="Create a new Contact. Opens a dialog."/>
-                    <Button x:Name="button_edit_contact" Content="Edit..." HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75" Click="button_edit_contact_Click" ToolTip="Opens a dialog allowing you to edit any of your contacts."/>
-                    <Button x:Name="button_remove_contact" Content="Remove..." HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75" Click="button_remove_contact_Click" ToolTip="Opens a dialog allowing you to remove any of your contacts."/>
+        <TabControl Margin="0,24,0,0">
+            <TabControl.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                    <GradientStop Color="#FF8BBECF"/>
+                    <GradientStop Color="#FFDCF7FF" Offset="0.915"/>
+                </LinearGradientBrush>
+            </TabControl.Background>
+            <TabItem x:Name="tab_Contacts" Header="Contacts" Cursor="Hand">
+                <Grid x:Name="tab_grid_contacts" Margin="0,0,0,0">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                            <GradientStop Color="#FF8BBECF"/>
+                            <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <TextBox x:Name="textBox_filter" HorizontalAlignment="Right" Height="23" Margin="0,10,153,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" BorderBrush="#FF7C7C7C"/>
+                    <Button x:Name="button_filter" Content="Search By Last Name" Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="button_filter_Click" ToolTip="Enter a search string to filter the contact list. Note: Only searches against last names at this time." HorizontalAlignment="Right" Width="138">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <DataGrid x:Name="dataGrid_contacts" Margin="90,39,10,10" BorderBrush="#FF7C7C7C"/>
+                    <Button x:Name="button_new_contact" Content="New..." HorizontalAlignment="Left" Margin="10,39,0,0" VerticalAlignment="Top" Width="75" Click="button_new_contact_Click" ToolTip="Create a new Contact. Opens a dialog.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="button_edit_contact" Content="Edit..." HorizontalAlignment="Left" Margin="10,64,0,0" VerticalAlignment="Top" Width="75" Click="button_edit_contact_Click" ToolTip="Opens a dialog allowing you to edit any of your contacts.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="button_remove_contact" Content="Remove..." HorizontalAlignment="Left" Margin="10,89,0,0" VerticalAlignment="Top" Width="75" Click="button_remove_contact_Click" ToolTip="Opens a dialog allowing you to remove any of your contacts.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
                 </Grid>
             </TabItem>
-            <TabItem Header="Mailing List">
-                <Grid x:Name="tab_grid_mailinglist" Background="#FFE5E5E5">
-                    <Button x:Name="button_send_to" Content="Send..." HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button_send_to_Click" ToolTip="Send mail to each contact in the currently selected list. Opens a dialog."/>
+            <TabItem x:Name="tab_MailingLists" Header="Mailing List">
+                <Grid x:Name="tab_grid_mailinglist">
+                    <Grid.Background>
+                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                            <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                            <GradientStop Color="#FF8BBECF"/>
+                            <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
+                        </LinearGradientBrush>
+                    </Grid.Background>
+                    <Button x:Name="button_send_to" Content="Send" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="button_send_to_Click" ToolTip="Send mail to each contact in the currently selected list. Opens a dialog.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Separator Margin="0,35,509,339"/>
                     <ListBox x:Name="listBox_mailing_list" Margin="90,10,10,10" ToolTip="A list of all your current mailing lists. To create, remove, or edit a list see the 'Mailing Lists' menu."/>
+                    <Button x:Name="button_new_list" Content="New List" Click="menu_item_new_list_Click" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" ToolTip="Create a new mailing list. Opens a dialog.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="button_edit_list" Content="Edit List" HorizontalAlignment="Left" Margin="10,88,0,0" VerticalAlignment="Top" Width="75" Click="menu_item_edit_list_Click" ToolTip="Edit selected mailing list. Opens a dialog.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
+                    <Button x:Name="button_remove_list" Content="Remove List" HorizontalAlignment="Left" Margin="10,118,0,0" VerticalAlignment="Top" Width="75" Click="menu_item_remove_list_Click" ToolTip="Remove saved mailing lists. Opens a dialog.">
+                        <Button.Effect>
+                            <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                        </Button.Effect>
+                    </Button>
                 </Grid>
             </TabItem>
         </TabControl>

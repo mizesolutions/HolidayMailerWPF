@@ -5,26 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="SendWindow" Height="636.838" Width="392.04">
+        Title="SendWindow" Height="651.959" Width="449">
     <Grid>
-        <Label x:Name="label_to" Content="To" HorizontalAlignment="Left" Margin="28,256,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_from" Content="Email" HorizontalAlignment="Left" Margin="28,154,0,0" VerticalAlignment="Top"/>
-        <Label x:Name="label_subject" Content="Subject" HorizontalAlignment="Left" Margin="28,341,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_from" Height="23" Margin="90,157,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="262"/>
-        <TextBox x:Name="textBox_to" HorizontalAlignment="Left" Height="80" Margin="90,256,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262"/>
-        <TextBox x:Name="textBox_subject" HorizontalAlignment="Left" Height="23" Margin="90,341,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="262"/>
-        <TextBox x:Name="textBox_body" HorizontalAlignment="Left" Height="156" Margin="28,369,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="324"/>
-        <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="117,576,0,0" VerticalAlignment="Top" Width="75" Click="button_send_Click"/>
-        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="197,576,0,0" VerticalAlignment="Top" Width="75" Click="button_cancel_Click"/>
-        <Label x:Name="label_pwd" Content="Password
-               " HorizontalAlignment="Left" Margin="28,188,0,0" VerticalAlignment="Top"/>
-        <PasswordBox x:Name="passwordBox" HorizontalAlignment="Left" Margin="90,188,0,0" VerticalAlignment="Top" Width="262" Height="26"/>
-        <TextBox x:Name="textBox_attatch" HorizontalAlignment="Left" Height="23" Margin="28,530,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="244"/>
-        <Button x:Name="button_attatch" Content="Attatch..." HorizontalAlignment="Left" Margin="277,533,0,0" VerticalAlignment="Top" Width="75" Click="button_attatch_Click"/>
-        <Label x:Name="label_instructions_server" Content="Supported SMTP email servers: Google" HorizontalAlignment="Left" Margin="28,8,0,0" VerticalAlignment="Top"/>
-        <TextBlock x:Name="textBlock_instructions" HorizontalAlignment="Left" Margin="28,39,0,0" TextWrapping="Wrap" Text="Note: If your google account is enabled with 2-factor authentication you will need to generate an app token in your Google account. You will use that token in place of your password." VerticalAlignment="Top" Height="74" Width="324"/>
-        <Separator HorizontalAlignment="Left" Height="100" Margin="28,190,0,0" VerticalAlignment="Top" Width="324"/>
-        <Separator HorizontalAlignment="Left" Height="100" Margin="28,80,0,0" VerticalAlignment="Top" Width="324"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                <GradientStop Color="#FF8BBECF"/>
+                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Label x:Name="label_to" Content="To" HorizontalAlignment="Left" Margin="20,232,0,0" VerticalAlignment="Top" Width="65" HorizontalContentAlignment="Right"/>
+        <Label x:Name="label_from" Content="Email" HorizontalAlignment="Left" Margin="20,147,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.737,0.615" Width="65" HorizontalContentAlignment="Right"/>
+        <Label x:Name="label_subject" Content="Subject" HorizontalAlignment="Left" Margin="20,316,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Right" Width="65"/>
+        <TextBox x:Name="textBox_from" Height="23" Margin="100,149,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TabIndex="1"/>
+        <TextBox x:Name="textBox_to" HorizontalAlignment="Right" Height="80" Margin="0,234,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" TabIndex="3"/>
+        <TextBox x:Name="textBox_subject" HorizontalAlignment="Right" Height="23" Margin="0,319,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="321" TabIndex="4"/>
+        <TextBox x:Name="textBox_body" Height="178" Margin="20,347,20,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TabIndex="5"/>
+        <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="90,573,0,0" VerticalAlignment="Top" Width="75" Click="button_send_Click" Focusable="False" TabIndex="8">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,573,90,0" VerticalAlignment="Top" Width="75" Click="button_cancel_Click" Focusable="False" TabIndex="9">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="label_pwd" Content="Password" HorizontalAlignment="Left" Margin="20,178,0,0" VerticalAlignment="Top" Width="65" HorizontalContentAlignment="Right"/>
+        <PasswordBox x:Name="passwordBox" Margin="100,180,20,0" VerticalAlignment="Top" Height="23" TabIndex="1"/>
+        <TextBox x:Name="textBox_attatch" Height="23" Margin="20,530,96,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" TabIndex="7"/>
+        <Button x:Name="button_attatch" Content="Attatch" HorizontalAlignment="Right" Margin="0,533,20,0" VerticalAlignment="Top" Width="65" Click="button_attatch_Click" Focusable="False" TabIndex="6">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
+            </Button.Effect>
+        </Button>
+        <Label x:Name="label_instructions_server" Content="Supported SMTP email servers: Google" Margin="10,8,10,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="14" Height="26"/>
+        <TextBlock x:Name="textBlock_instructions" Margin="20,39,20,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56">
+            <Bold><Underline>Note:</Underline></Bold> If your Google account is enabled with 2-factor authentication you will need to generate an App password in your Google account. You will use that app password in place of your password.
+        </TextBlock>
+        <Separator Height="25" Margin="0,202,0,0" VerticalAlignment="Top"/>
+        <Separator Height="23" Margin="0,125,0,0" VerticalAlignment="Top" />
+        <TextBlock Margin="120,101,120,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Hyperlink NavigateUri="https://myaccount.google.com/intro/security" RequestNavigate="Hyperlink_RequestNavigate"><Run Text="Click here for more information"/></Hyperlink></TextBlock>
 
 
 

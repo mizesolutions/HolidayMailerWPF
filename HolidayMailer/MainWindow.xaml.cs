@@ -90,6 +90,8 @@ namespace HolidayMailer {
 
         private void menu_item_edit_list_Click(object sender, RoutedEventArgs e) {
             if (listBox_mailing_list.SelectedValue != null) {
+                tab_Contacts.IsSelected = false;
+                tab_MailingLists.IsSelected = true;
                 string name = listBox_mailing_list.SelectedValue.ToString();
                 launchNewList.Invoke(new MailingListWindow(db, name));
             }
@@ -159,5 +161,24 @@ namespace HolidayMailer {
         private void menu_item_exit_Click(object sender, RoutedEventArgs e) {
             Close();
         }
+
+        private void menu_item_edit_list_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            tab_Contacts.IsSelected = false;
+            tab_MailingLists.IsSelected = true;
+        }
+
+        private void menu_item_new_contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            tab_Contacts.IsSelected = true;
+            tab_MailingLists.IsSelected = false;
+        }
+
+        private void menu_item_edit_contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            tab_Contacts.IsSelected = true;
+            tab_MailingLists.IsSelected = false;
+        }
+
     }
 }

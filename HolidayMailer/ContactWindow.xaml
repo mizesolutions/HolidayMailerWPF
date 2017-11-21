@@ -5,17 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="Contact" Height="232.992" Width="377.459">
+        Title="Contact" Height="232.992" Width="377.459" ResizeMode="NoResize">
     <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                <GradientStop Color="#FF8BBECF"/>
+                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
+            </LinearGradientBrush>
+        </Grid.Background>
         <Label x:Name="label_first_name" Content="First Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_first_name" HorizontalAlignment="Left" Height="23" Margin="82,14,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242"/>
+        <TextBox x:Name="textBox_first_name" Height="23" Margin="82,14,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <Label x:Name="label_last_name" Content="Last Name:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_last_name" HorizontalAlignment="Left" Height="23" Margin="82,44,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242"/>
+        <TextBox x:Name="textBox_last_name" Height="23" Margin="82,44,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <Label x:Name="label_email" Content="Email:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_email" HorizontalAlignment="Left" Height="23" Margin="82,75,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="242"/>
+        <TextBox x:Name="textBox_email" Height="23" Margin="82,75,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBox_previous_mailer" Content="Has sent me mail previously" HorizontalAlignment="Left" Margin="156,112,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="117,164,0,0" VerticalAlignment="Top" Width="75" Click="button_save_Click"/>
-        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Left" Margin="197,164,0,0" VerticalAlignment="Top" Width="75" Click="button_cancel_Click"/>
+        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="90,0,0,18" VerticalAlignment="Bottom" Width="75" Click="button_save_Click">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,90,18" VerticalAlignment="Bottom" Width="75" Click="button_cancel_Click">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

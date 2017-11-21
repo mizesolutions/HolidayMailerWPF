@@ -5,11 +5,26 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="RemoveListWindow" Height="367.521" Width="538.738">
+        Title="RemoveListWindow" Height="311.761" Width="538.738" ResizeMode="NoResize">
     <Grid>
-        <ListBox x:Name="listBox_mailingLists" Height="201" Margin="10,10,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="511"/>
-        <Button x:Name="button_remove" Content="Remove" Margin="224,216,0,0" VerticalAlignment="Top" Click="button_remove_Click" HorizontalAlignment="Left" Width="77"/>
-        <Button x:Name="button_cancel" Content="Exit" Margin="224,292,0,0" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Left" Width="77"/>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF5B8D9C" Offset="1"/>
+                <GradientStop Color="#FF8BBECF"/>
+                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <ListBox x:Name="listBox_mailingLists" Height="215" Margin="10,10,10,0" VerticalAlignment="Top"/>
+        <Button x:Name="button_remove" Content="Remove" Margin="150,240,0,0" VerticalAlignment="Top" Click="button_remove_Click" HorizontalAlignment="Left" Width="77">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
+            </Button.Effect>
+        </Button>
+        <Button x:Name="button_cancel" Content="Exit" Margin="0,240,150,0" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Right" Width="77">
+            <Button.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

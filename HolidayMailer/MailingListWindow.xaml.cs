@@ -18,12 +18,23 @@ namespace HolidayMailer {
 
         public MailingListWindow(Database db, string listName=null) {
             InitializeComponent();
+            CenterWindowOnScreen();
             this.db = db;
             db.LoadDataGrid(dataGrid_results, Queries.SelectAll(Database.ContactsTable));
             emails = new List<string>();
             if(listName != null) {
                 LoadListData(listName);
             }
+        }
+
+        private void CenterWindowOnScreen()
+        {
+            double screenWidth = SystemParameters.PrimaryScreenWidth;
+            double screenHeight = SystemParameters.PrimaryScreenHeight;
+            double windowWidth = this.Width;
+            double windowHeight = this.Height;
+            this.Left = (screenWidth / 2) - (windowWidth / 2);
+            this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
         private void button_add_Click(object sender, RoutedEventArgs e) {
