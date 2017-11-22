@@ -20,9 +20,6 @@ namespace HolidayMailer {
         private const string smtpServer = "smtp.gmail.com";
         private const int port = 587;
         private List<string> emailRecipients;
-
-        private string emailSender;
-        private string mypwd;
         private string subject;
         private string body;
         private string attachmentPath;
@@ -59,11 +56,11 @@ namespace HolidayMailer {
                 CollectInfo();
                 try {
                     var client = new SmtpClient(smtpServer, port) {
-                        Credentials = new NetworkCredential(emailSender, mypwd),
+                        Credentials = Cred.NetCred,
                         EnableSsl = true
                     };
                     foreach (string email in emailRecipients) {
-                        MailMessage message = new MailMessage(emailSender, email, subject, body);
+                        MailMessage message = new MailMessage(Cred.User, email, subject, body);
                         if (attachmentPath != "" && attachmentPath != null) {
                             Attachment attachment = new Attachment(attachmentPath);
                             message.Attachments.Add(attachment);
@@ -73,7 +70,9 @@ namespace HolidayMailer {
                     }
                 }
                 catch (Exception e) {
-                    MessageBox.Show(e.Message);
+                    MessageBox.Show(Application.Current.MainWindow, e.Message + "\n\nPlease login again.", "Auth Error");
+                    Close();
+                    MainWindow.LaunchCredWindow();
                 }
             }
         }
@@ -82,29 +81,20 @@ namespace HolidayMailer {
             ResestBackgrounds();
             bool valid = true;
             valid = TestTextBox(textBox_body);
-            valid = TestTextBox(textBox_from);
             valid = TestTextBox(textBox_subject);
             valid = TestTextBox(textBox_to);
-            if (passwordBox.Password == null || passwordBox.Password == "") {
-                passwordBox.Background = Brushes.Red;
-                valid = false;
-            }
             return valid;
         }
 
         private void CollectInfo() {
-            mypwd = passwordBox.Password;
-            emailSender = textBox_from.Text;
             subject = textBox_subject.Text;
             body = textBox_body.Text;
         }
 
         private void ResestBackgrounds() {
             textBox_body.Background = Brushes.White;
-            textBox_from.Background = Brushes.White;
             textBox_subject.Background = Brushes.White;
             textBox_to.Background = Brushes.White;
-            passwordBox.Background = Brushes.White;
         }
 
         private bool TestTextBox(TextBox tb) {

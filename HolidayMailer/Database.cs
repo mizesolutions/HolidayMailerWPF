@@ -12,6 +12,7 @@ namespace HolidayMailer {
     /// Holiday Mailer
     /// 
     public class Database {
+
         private static string DATABASE_NAME = "ContactsDb.sqlite";
         private static string CONTACTS = "Contacts";
         private static string LISTS = "Lists";

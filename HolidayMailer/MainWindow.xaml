@@ -19,6 +19,7 @@
                 <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
             </Menu.Effect>
             <MenuItem x:Name="menu_File" Header="File" AllowDrop="True">
+                <MenuItem Name="menu_item_login" Header="Login" Click="menu_item_login_Click" />
                 <MenuItem Name="menu_item_exit" Header="Exit" Click="menu_item_exit_Click"></MenuItem>
             </MenuItem>
             <MenuItem x:Name="menu_Contacts" Header="Contacts" >

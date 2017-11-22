@@ -18,6 +18,7 @@ namespace HolidayMailer {
         private LaunchWindow launchRemoveList;
         private LaunchWindow launchRemoveContact;
         private LaunchWindow launchEditContactsWindow;
+        private static LaunchWindow launchCredWindow;
 
         public MainWindow() {
             InitializeComponent();
@@ -26,6 +27,10 @@ namespace HolidayMailer {
 
             db = new Database();
             UpdateDataGrid();
+
+            launchCredWindow = (window) => {
+                window.ShowDialog();
+            };
 
             launchContact = (window) => {
                 window.ShowDialog();
@@ -179,6 +184,18 @@ namespace HolidayMailer {
             tab_Contacts.IsSelected = true;
             tab_MailingLists.IsSelected = false;
         }
+
+        private void menu_item_login_Click(object sender, RoutedEventArgs e)
+        {
+            launchCredWindow.Invoke(new CredWindow());
+        }
+
+        public static void LaunchCredWindow()
+        {
+            launchCredWindow.Invoke(new CredWindow());
+        }
+
+
 
     }
 }
