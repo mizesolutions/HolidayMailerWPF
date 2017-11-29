@@ -15,12 +15,12 @@
             </LinearGradientBrush>
         </Grid.Background>
         <ListBox x:Name="listBox_mailingLists" Height="215" Margin="10,10,10,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_remove" Content="Remove" Margin="150,240,0,0" VerticalAlignment="Top" Click="button_remove_Click" HorizontalAlignment="Left" Width="77">
+        <Button x:Name="button_remove" Content="Remove" Margin="145,240,0,0" VerticalAlignment="Top" Click="button_remove_Click" HorizontalAlignment="Left" Width="77">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_cancel" Content="Exit" Margin="0,240,150,0" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Right" Width="77">
+        <Button x:Name="button_cancel" Content="Canel" Margin="0,240,145,0" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Right" Width="77">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>

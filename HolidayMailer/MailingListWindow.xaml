@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="Mailing List" Height="563.685" Width="737.165" ResizeMode="NoResize">
+        Title="Mailing List" Height="563.685" Width="1019" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -14,30 +14,30 @@
                 <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <DataGrid x:Name="dataGrid_results" Margin="10,55,261,10" SelectionMode="Single"/>
-        <ListBox x:Name="listBox_members" Margin="486,55,10,10"/>
-        <Button x:Name="button_add" Content="Add" Margin="0,23,250,0" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top" Click="button_add_Click">
+        <DataGrid x:Name="dataGrid_results" Margin="10,55,0,10" SelectionMode="Single" HorizontalAlignment="Left" Width="655"/>
+        <ListBox x:Name="listBox_members" Margin="0,55,10,10" HorizontalAlignment="Right" Width="327"/>
+        <Button x:Name="button_add" Content="Add" Margin="562,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_add_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_remove" Content="Remove" Margin="0,23,170,0" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top" Click="button_remove_Click">
+        <Button x:Name="button_remove" Content="Remove" Margin="674,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_remove_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_save" Content="Save" Margin="0,23,90,0" HorizontalAlignment="Right" Width="75" Height="20" VerticalAlignment="Top" Click="button_save_Click">
+        <Button x:Name="button_save" Content="Save" Margin="786,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_save_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_cancel" Content="Cancel" Margin="0,23,10,0" Height="20" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Right" Width="75">
+        <Button x:Name="button_cancel" Content="Cancel" Margin="899,20,0,0" Height="20" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Left" Width="75">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Label x:Name="label_name" Content="List Name" Margin="10,17,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" FontWeight="Bold" HorizontalContentAlignment="Right"/>
-        <TextBox x:Name="textBox_name" Height="23" Margin="90,20,341,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <Label x:Name="label_name" Content="List Name" Margin="1,17,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="75" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+        <TextBox x:Name="textBox_name" Height="23" Margin="82,20,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" HorizontalAlignment="Left" Width="468"/>
 
     </Grid>
 </Window>

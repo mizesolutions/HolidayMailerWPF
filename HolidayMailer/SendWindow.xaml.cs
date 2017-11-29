@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
 using System.Net.Mail;
 using System.Windows;
 using System.Windows.Controls;
@@ -9,13 +8,7 @@ using System.Windows.Media;
 using System.Windows.Navigation;
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for SendWindow.xaml
-    /// </summary>
+
     public partial class SendWindow : Window {
         private const string smtpServer = "smtp.gmail.com";
         private const int port = 587;
@@ -70,7 +63,7 @@ namespace HolidayMailer {
                     }
                 }
                 catch (Exception e) {
-                    MessageBox.Show(Application.Current.MainWindow, e.Message + "\n\nPlease login again.", "Auth Error");
+                    MessageBox.Show(Application.Current.MainWindow, e.HResult + e.HelpLink + "\n\nPlease login again.", "Auth Error");
                     Close();
                     MainWindow.LaunchCredWindow();
                 }
@@ -121,5 +114,7 @@ namespace HolidayMailer {
                 textBox_attatch.Text = attachmentPath;
             }
         }
+       
+
     }
 }

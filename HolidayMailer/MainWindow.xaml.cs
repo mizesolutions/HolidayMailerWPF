@@ -2,13 +2,7 @@
 using System.Windows;
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window {
         private Database db;
         private delegate void LaunchWindow(Window window);
@@ -76,7 +70,7 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void button_new_contact_Click(object sender, RoutedEventArgs e) {
+        private void Button_new_contact_Click(object sender, RoutedEventArgs e) {
             launchContact.Invoke(new MemberResult(db));
         }
 
@@ -101,23 +95,37 @@ namespace HolidayMailer {
                 launchNewList.Invoke(new MailingListWindow(db, name));
             }
             else {
-                MessageBox.Show("Please select a list to edit and try again.");
+                MessageBox.Show(Application.Current.MainWindow, "Please select a list to edit and try again.", "List Selection");
             }
         }
 
         private void button_send_to_Click(object sender, RoutedEventArgs e) {
-            if (listBox_mailing_list.SelectedItems.Count > 0) {
-                string listName = listBox_mailing_list.SelectedItem.ToString();
-                List<string> recipients = new List<string>();
-                List<Member> members = db.MemberQuery();
-                foreach (Member member in members) {
-                    if (member.ListName == listName) {
-                        recipients.Add(member.Email);
+
+            if (Cred.CredReady())
+            {
+                if (listBox_mailing_list.SelectedItems.Count > 0)
+                {
+                    string listName = listBox_mailing_list.SelectedItem.ToString();
+                    List<string> recipients = new List<string>();
+                    List<Member> members = db.MemberQuery();
+                    foreach (Member member in members)
+                    {
+                        if (member.ListName == listName)
+                        {
+                            recipients.Add(member.Email);
+                        }
                     }
+                    launchSendMail.Invoke(new SendWindow(recipients));
                 }
-                launchSendMail.Invoke(new SendWindow(recipients));
-            }else {
-                MessageBox.Show("Please select a mailing list and try again.");
+                else
+                {
+                    MessageBox.Show(Application.Current.MainWindow, "Please select a mailing list and try again.", "List Not Selected");
+                }
+            }
+            else
+            {
+                MessageBox.Show(Application.Current.MainWindow, "Please login before sending mail.", "Not Signed In");
+                LaunchCredWindow();
             }
 
         }
