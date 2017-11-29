@@ -73,12 +73,12 @@ namespace HolidayMailer
             e.Handled = true;
         }
 
-        private void btn_cancel_Click(object sender, RoutedEventArgs e)
+        private void Btn_cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
 
-        private void btn_submit_Click(object sender, RoutedEventArgs e)
+        private void Btn_submit_Click(object sender, RoutedEventArgs e)
         {
             try
             {
@@ -92,5 +92,6 @@ namespace HolidayMailer
                 MessageBox.Show(Application.Current.MainWindow, ex.ToString(), "Input Error");
             }
         }
+        
     }
 }

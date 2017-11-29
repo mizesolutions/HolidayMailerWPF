@@ -21,12 +21,12 @@
         <Label Content="User:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69" Margin="70,226,0,0"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="70,252,0,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69"/>
         <PasswordBox x:Name="pwdBx_pwd" HorizontalAlignment="Left" Height="20" Margin="144,258,0,0" VerticalAlignment="Top" Width="211" TabIndex="2"/>
-        <Button x:Name="btn_submit" Content="Submit" HorizontalAlignment="Left" Margin="120,315,0,0" VerticalAlignment="Top" Width="75" Click="btn_submit_Click" TabIndex="3">
+        <Button x:Name="btn_submit" Content="Submit" HorizontalAlignment="Left" Margin="120,315,0,0" VerticalAlignment="Top" Width="75" Click="Btn_submit_Click" TabIndex="3">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,315,120,0" VerticalAlignment="Top" Width="75" Click="btn_cancel_Click" TabIndex="4">
+        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,315,120,0" VerticalAlignment="Top" Width="75" Click="Btn_cancel_Click" TabIndex="4">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
             </Button.Effect>

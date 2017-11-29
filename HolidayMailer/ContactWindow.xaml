@@ -21,7 +21,7 @@
         <Label x:Name="label_email" Content="Email:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
         <TextBox x:Name="textBox_email" Height="23" Margin="82,75,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <CheckBox x:Name="checkBox_previous_mailer" Content="Has sent me mail previously" HorizontalAlignment="Left" Margin="156,112,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="75,0,0,18" VerticalAlignment="Bottom" Width="75" Click="button_save_Click">
+        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="75,0,0,18" VerticalAlignment="Bottom" Width="75" Click="Button_save_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
             </Button.Effect>

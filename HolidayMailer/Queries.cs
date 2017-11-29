@@ -1,9 +1,5 @@
 ﻿using System;
 
-/// Brian Mize
-/// CSCD 371
-/// Holiday Mailer
-/// 
 namespace HolidayMailer {
     class Queries {
 

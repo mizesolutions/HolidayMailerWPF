@@ -3,15 +3,11 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for EditContactWindow.xaml
-    /// </summary>
+
     public partial class EditContactWindow : Window {
+
         private Database db;
+
         public EditContactWindow(Database db) {
             InitializeComponent();
             CenterWindowOnScreen();
@@ -29,7 +25,7 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void button_save_Click(object sender, RoutedEventArgs e) {
+        private void Button_save_Click(object sender, RoutedEventArgs e) {
             if (IsValid()) {
                 DataRowView row = (DataRowView)dataGrid_contacts.SelectedItems[0];
                 string oldFName = row["FirstName"].ToString();
@@ -45,7 +41,7 @@ namespace HolidayMailer {
                 db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
             }
             else {
-                MessageBox.Show("Please select a contact and try again.");
+                MessageBox.Show(Application.Current.MainWindow, "Please select a contact and try again.", "Contact Selection");
             }
         }
 
@@ -58,7 +54,7 @@ namespace HolidayMailer {
         }
 
         private bool IsValidTextBox(TextBox tb) {
-            return tb.Text != null && tb.Text != "";
+            return !string.IsNullOrEmpty(tb.Text);
         }
 
         private void LoadNodes() {

@@ -16,22 +16,22 @@
         </Grid.Background>
         <DataGrid x:Name="dataGrid_results" Margin="10,55,0,10" SelectionMode="Single" HorizontalAlignment="Left" Width="655"/>
         <ListBox x:Name="listBox_members" Margin="0,55,10,10" HorizontalAlignment="Right" Width="327"/>
-        <Button x:Name="button_add" Content="Add" Margin="562,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_add_Click">
+        <Button x:Name="button_add" Content="Add" Margin="562,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Button_add_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_remove" Content="Remove" Margin="674,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_remove_Click">
+        <Button x:Name="button_remove" Content="Remove" Margin="674,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Button_remove_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_save" Content="Save" Margin="786,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="button_save_Click">
+        <Button x:Name="button_save" Content="Save" Margin="786,20,0,0" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Click="Button_save_Click">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>
         </Button>
-        <Button x:Name="button_cancel" Content="Cancel" Margin="899,20,0,0" Height="20" VerticalAlignment="Top" Click="button_cancel_Click" HorizontalAlignment="Left" Width="75">
+        <Button x:Name="button_cancel" Content="Cancel" Margin="899,20,0,0" Height="20" VerticalAlignment="Top" Click="Button_cancel_Click" HorizontalAlignment="Left" Width="75">
             <Button.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
             </Button.Effect>

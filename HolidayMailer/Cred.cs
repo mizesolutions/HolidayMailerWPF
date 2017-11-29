@@ -10,14 +10,14 @@ namespace HolidayMailer
     static class Cred
     {
         private static NetworkCredential netCred;
-        private static String user;
+        private static string user;
 
         public static NetworkCredential NetCred { get => netCred; set => netCred = value; }
         public static string User { get => user; set => user = value; }
         
         public static bool CredReady()
         {
-            return (User != null && User.Length > 0);
+            return !string.IsNullOrEmpty(User);
         }
 
     }

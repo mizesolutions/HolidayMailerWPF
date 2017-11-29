@@ -2,13 +2,7 @@
 using System.Windows.Media;
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for Contact.xaml
-    /// </summary>
+
     public partial class MemberResult : Window {
         private Database db;
         public MemberResult(Database db) {
@@ -27,7 +21,7 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void button_save_Click(object sender, RoutedEventArgs e) {
+        private void Button_save_Click(object sender, RoutedEventArgs e) {
             if (IsValid()) {
                 string fName = textBox_first_name.Text;
                 string lName = textBox_last_name.Text;

@@ -3,15 +3,11 @@ using System.Windows;
 
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for RemoveContactWindow.xaml
-    /// </summary>
+
     public partial class RemoveContactWindow : Window {
+
         private Database db;
+
         public RemoveContactWindow(Database db) {
             InitializeComponent();
             CenterWindowOnScreen();
@@ -29,7 +25,7 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void button_remove_Click(object sender, RoutedEventArgs e) {
+        private void Button_remove_Click(object sender, RoutedEventArgs e) {
             if (dataGrid_contacts.SelectedItems.Count > 0) {
                 DataRowView row = (DataRowView)dataGrid_contacts.SelectedItems[0];
                 string email = row["Email"].ToString();
@@ -39,7 +35,7 @@ namespace HolidayMailer {
             }
         }
 
-        private void button_exit_Click(object sender, RoutedEventArgs e) {
+        private void Button_exit_Click(object sender, RoutedEventArgs e) {
             Close();
         }
     }

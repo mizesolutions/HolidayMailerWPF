@@ -7,41 +7,27 @@ using System.Windows;
 using System.Windows.Controls;
 
 namespace HolidayMailer {
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
+
     public class Database {
 
-        private static string DATABASE_NAME = "ContactsDb.sqlite";
-        private static string CONTACTS = "Contacts";
-        private static string LISTS = "Lists";
-        private static string LIST_MEMBERS = "ListMembers";
+        private const string DATABASE_NAME = "ContactsDb.sqlite";
+        private const string CONTACTS = "Contacts";
+        private const string LISTS = "Lists";
+        private const string LIST_MEMBERS = "ListMembers";
 
-        public static string DatabaseName {
-            get { return DATABASE_NAME; }
-        }
+        public static string DatabaseName { get => DATABASE_NAME; }
 
-        public static string ContactsTable {
-            get { return CONTACTS; }
-        }
+        public static string ContactsTable {  get => CONTACTS; }
+ 
+        public static string ListsTable { get => LISTS; }
 
-        public static string ListsTable {
-            get { return LISTS; }
-        }
-
-        public static string ListMembersTable {
-            get { return LIST_MEMBERS; }
-        }
+        public static string ListMembersTable { get => LIST_MEMBERS; }
 
         public Database() {
-            initDB();
+            InitDB();
         }
 
-        /// <summary>
-        /// Initialize the database
-        /// </summary>
-        private void initDB() {
+        private void InitDB() {
             if (!File.Exists(DATABASE_NAME)) {
                 SQLiteConnection.CreateFile(DATABASE_NAME);
             }
@@ -72,7 +58,7 @@ namespace HolidayMailer {
             }
             catch (Exception ex) {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
             finally {
                 conn.Close();
@@ -80,18 +66,11 @@ namespace HolidayMailer {
 
         }
 
-        /// <summary>
-        /// Returns a connection to the database
-        /// </summary>
-        /// <returns>SQLiteConnection</returns>
         private SQLiteConnection GetConnection() {
             SQLiteConnection conn = new SQLiteConnection(String.Format("Data Source={0}; Version=3;", DATABASE_NAME));
             return conn;
         }
 
-        /// <summary>
-        /// Insert a record into the database.
-        /// </summary>
         public void InsertRecord(string query) {
             try {
                 SQLiteConnection conn = GetConnection();
@@ -101,16 +80,11 @@ namespace HolidayMailer {
                 conn.Close();
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
 
         }
 
-        /// <summary>
-        /// Populate the given control with the results of the given database query.
-        /// </summary>
-        /// <param name="control"></param>
-        /// <param name="commandText"></param>
         public void LoadDataGrid(ItemsControl control, string commandText) {
             try {
 
@@ -122,15 +96,10 @@ namespace HolidayMailer {
                 }
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
         }
 
-        /// <summary>
-        /// Populate the given ListBox with the results of the given database query.
-        /// </summary>
-        /// <param name="listbox"></param>
-        /// <param name="commandText"></param>
         public void LoadListBox(ListBox listbox, string commandText) {
             try {
                 SQLiteConnection connect = GetConnection();
@@ -145,14 +114,10 @@ namespace HolidayMailer {
                 }
             }
             catch (Exception ex) {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
         }
 
-        /// <summary>
-        /// Query the database for all the mailing lists.
-        /// </summary>
-        /// <returns></returns>
         public List<MailingList> ListQuery() {
             List<MailingList> list = new List<MailingList>();
             try {
@@ -170,10 +135,6 @@ namespace HolidayMailer {
             return list;
         }
 
-        /// <summary>
-        /// Query the database for all contacts
-        /// </summary>
-        /// <returns></returns>
         public List<Person> PersonQuery() {
             List<Person> list = new List<Person>();
             try {
@@ -190,15 +151,11 @@ namespace HolidayMailer {
             }
             catch (Exception ex) {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
             return list;
         }
 
-        /// <summary>
-        /// Query the database for all contacts that are part of a list.
-        /// </summary>
-        /// <returns></returns>
         public List<Member> MemberQuery() {
             List<Member> list = new List<Member>();
             try {
@@ -212,15 +169,11 @@ namespace HolidayMailer {
             }
             catch (Exception ex) {
 
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(Application.Current.MainWindow, ex.Message, "Error");
             }
             return list;
         }
 
-        /// <summary>
-        /// Delete a row given the passed in command.
-        /// </summary>
-        /// <param name="commandText"></param>
         public void ExecuteDbQuery(string commandText) {
             using (SQLiteConnection conn = GetConnection()) {
                 conn.Open();

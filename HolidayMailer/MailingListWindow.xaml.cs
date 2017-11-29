@@ -5,14 +5,9 @@ using System.Windows;
 using System.Windows.Media;
 
 namespace HolidayMailer {
-    /// <summary>
-    /// Brian Mize
-    /// CSCD 371
-    /// Holiday Mailer
-    /// 
-    /// Interaction logic for MailingList.xaml
-    /// </summary>
+
     public partial class MailingListWindow : Window {
+
         private Database db;
         private List<string> emails;
 
@@ -37,7 +32,7 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void button_add_Click(object sender, RoutedEventArgs e) {
+        private void Button_add_Click(object sender, RoutedEventArgs e) {
             if(dataGrid_results.SelectedCells.Count > 0) {
                 DataRowView dataRow = (DataRowView) dataGrid_results.SelectedItem;
                 int index = dataGrid_results.SelectedIndex;
@@ -46,7 +41,7 @@ namespace HolidayMailer {
             }
         }
 
-        private void button_remove_Click(object sender, RoutedEventArgs e) {
+        private void Button_remove_Click(object sender, RoutedEventArgs e) {
             if(listBox_members.SelectedItem != null) {
                 listBox_members.Items.Remove(listBox_members.SelectedItem);
             }
@@ -55,11 +50,11 @@ namespace HolidayMailer {
             }
         }
 
-        private void button_cancel_Click(object sender, RoutedEventArgs e) {
+        private void Button_cancel_Click(object sender, RoutedEventArgs e) {
             Close();
         }
 
-        private void button_save_Click(object sender, RoutedEventArgs e) {
+        private void Button_save_Click(object sender, RoutedEventArgs e) {
 
             List<string> newEmails = CollectData();
             if (IsValid()) {
@@ -95,7 +90,7 @@ namespace HolidayMailer {
             }
             if (listBox_members.Items.Count <= 0) {
                 valid = false;
-                MessageBox.Show("Please add at least one contact.");
+                MessageBox.Show(Application.Current.MainWindow, "Please add at least one contact.", "Contact Selection");
             }
 
             return valid;
