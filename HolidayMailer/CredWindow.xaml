@@ -17,7 +17,9 @@
         <Image Height="85" Margin="120,10,120,0" VerticalAlignment="Top" Source="google_2015.png"/>
         <TextBlock x:Name="textBlock_instructions" Margin="40,108,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56"><Bold><Underline><Run Text="Note:"/></Underline></Bold><Run Text=" If your Google account is enabled with 2-factor authentication you will need to generate an App password in your Google account. You will use that app password in place of your password."/></TextBlock>
         <TextBlock Margin="40,171,40,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Center" Width="413"><Run Text="    "/><Hyperlink NavigateUri="https://myaccount.google.com/intro/security" RequestNavigate="Hyperlink_RequestNavigate" Focusable="False"><Run Text="Click here for more information "/></Hyperlink></TextBlock>
-        <TextBox x:Name="txtBx_User" HorizontalAlignment="Left" Height="20" Margin="144,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" TabIndex="1"/>
+        <StackPanel FocusManager.FocusedElement="{Binding ElementName=txtBx_User}">
+            <TextBox x:Name="txtBx_User" HorizontalAlignment="Left" Height="20" Margin="144,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" TabIndex="1" />
+        </StackPanel>
         <Label Content="User:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69" Margin="70,226,0,0"/>
         <Label Content="Password:" HorizontalAlignment="Left" Margin="70,252,0,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69"/>
         <PasswordBox x:Name="pwdBx_pwd" HorizontalAlignment="Left" Height="20" Margin="144,258,0,0" VerticalAlignment="Top" Width="211" TabIndex="2"/>

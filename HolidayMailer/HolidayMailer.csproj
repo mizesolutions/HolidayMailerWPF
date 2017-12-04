@@ -78,12 +78,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AssemblyInfo.cs" />
     <Compile Include="Cred.cs" />
     <Compile Include="CredWindow.xaml.cs">
       <DependentUpon>CredWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="EditContactWindow.xaml.cs">
       <DependentUpon>EditContactWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Help.xaml.cs">
+      <DependentUpon>Help.xaml</DependentUpon>
     </Compile>
     <Compile Include="MailingList.cs" />
     <Compile Include="Member.cs" />
@@ -107,6 +111,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EditContactWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Help.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,7 +195,7 @@
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_AssemblyInfoFilename="HolidayMailer\Properties\AssemblyInfo.cs" BuildVersion_StartDate="2000/1/1" />
+      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_AssemblyInfoFilename="HolidayMailer\Properties\AssemblyInfo.cs" BuildVersion_UseGlobalSettings="True" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -85,6 +85,7 @@ namespace HolidayMailer
                 CredSet();
                 Cred.NetCred = NetCred;
                 Cred.User = User;
+                ((MainWindow)Application.Current.MainWindow).ChangeLogInOut(false);
                 Close();
             }
             catch (Exception ex)

@@ -91,6 +91,7 @@ namespace HolidayMailer {
             if (listBox_members.Items.Count <= 0) {
                 valid = false;
                 MessageBox.Show(Application.Current.MainWindow, "Please add at least one contact.", "Contact Selection");
+                this.Focus();
             }
 
             return valid;

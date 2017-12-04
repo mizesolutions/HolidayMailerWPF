@@ -42,6 +42,7 @@ namespace HolidayMailer {
             }
             else {
                 MessageBox.Show(Application.Current.MainWindow, "Please select a contact and try again.", "Contact Selection");
+                this.Focus();
             }
         }
 

@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="MainWindow" Height="475" Width="675" MinHeight="475" MinWidth="675" MaxHeight="1475" MaxWidth="1675" BorderBrush="#FF6BF55D">
+        WindowStartupLocation="CenterScreen"
+        Title="MainWindow" Height="362" Width="524" MinHeight="475" MinWidth="675" MaxHeight="1475" MaxWidth="1675" BorderBrush="#FF6BF55D">
     <Grid Margin="0,0,0,0">
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -19,20 +20,26 @@
                 <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
             </Menu.Effect>
             <MenuItem x:Name="menu_File" Header="File" AllowDrop="True" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}">
-                <MenuItem Name="menu_item_login" Header="Login" Click="Menu_item_login_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
-                <MenuItem Name="menu_item_logout" Header="Logout"   FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Click="Menu_item_logout_Click" />
+                <MenuItem Name="menuIt_login" Header="Login" Click="MenuIt_login_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+                <MenuItem Name="menuIt_logout" Header="Logout"   FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Click="MenuIt_logout_Click" />
                 <Separator />
-                <MenuItem Name="menu_item_exit" Header="Exit" Click="Menu_item_exit_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+                <MenuItem Name="menuIt_exit" Header="Exit" Click="MenuIt_exit_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
             </MenuItem>
             <MenuItem x:Name="menu_Contacts" Header="Contacts" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}">
-                <MenuItem Name="menu_item_new_contact" Header="New Contact" MouseEnter="Menu_item_new_contact_MouseEnter" Click="Menu_item_new_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
-                <MenuItem Name="menu_item_edit_contact" Header="Edit Contacts" MouseEnter="Menu_item_edit_contact_MouseEnter" Click="Menu_item_edit_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
-                <MenuItem Name="menu_item_remove_contact" Header="Remove Contacts" MouseEnter="Menu_item_remove_contact_MouseEnter" Click="Button_remove_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"   />
+                <MenuItem Name="menuIt_new_contact" Header="New Contact" MouseEnter="MenuIt_Contact_MouseEnter" Click="MenuIt_new_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+                <MenuItem Name="menuIt_edit_contact" Header="Edit Contacts" MouseEnter="MenuIt_Contact_MouseEnter" Click="MenuIt_edit_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+                <MenuItem Name="menuIt_remove_contact" Header="Remove Contacts" MouseEnter="MenuIt_Contact_MouseEnter" Click="Button_remove_contact_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
             </MenuItem>
             <MenuItem x:Name="menu_MailingLists" Header="Mailing Lists" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" >
-                <MenuItem Name="menu_item_new_list" Header="New List" MouseEnter="Menu_item_new_list_MouseEnter" Click="Menu_item_new_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"  />
-                <MenuItem Name="menu_item_edit_list" Header="Edit Selected List" MouseEnter="Menu_item_edit_list_MouseEnter" Click="Menu_item_edit_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
-                <MenuItem Name="menu_item_remove_list" Header="Remove Lists" MouseEnter="Menu_item_remove_list_MouseEnter" Click="Menu_item_remove_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"/>
+                <MenuItem x:Name="menuIt_send" Header="Send Mail" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" MouseEnter="MenuIt_Mailing_MouseEnter" Click="MenuIt_send_Click" />
+                <Separator />
+                <MenuItem Name="menuIt_new_list" Header="New List" MouseEnter="MenuIt_Mailing_MouseEnter" Click="MenuIt_new_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"  />
+                <MenuItem Name="menuIt_edit_list" Header="Edit Selected List" MouseEnter="MenuIt_Mailing_MouseEnter" Click="MenuIt_edit_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" />
+                <MenuItem Name="menuIt_remove_list" Header="Remove Lists" MouseEnter="MenuIt_Mailing_MouseEnter" Click="MenuIt_remove_list_Click" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}"/>
+            </MenuItem>
+            <MenuItem x:Name="menu_Help" Header="Help" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" >
+                <MenuItem x:Name="menuIt_about" Header="About" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Click="MenuIt_about_click" />
+                <MenuItem x:Name="menuIt_help" Header="Help" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Click="MenuIt_help_click" />
             </MenuItem>
         </Menu>
         <TabControl Margin="0,24,0,0">
@@ -110,24 +117,24 @@
                             <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
                         </LinearGradientBrush>
                     </Grid.Background>
-                    <Button x:Name="button_send_to" Content="Send" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_send_to_Click" ToolTip="Log in first to send mail to each contact in the currently selected list. Opens a dialog.">
+                    <Button x:Name="button_send_to" Content="Send Mail" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_send_to_Click" ToolTip="Log in first to send mail to each contact in the currently selected list. Opens a dialog.">
                         <Button.Effect>
                             <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
                         </Button.Effect>
                     </Button>
-                    <Separator Margin="-3,37,474,329"/>
+                    <Separator Margin="-3,37,474,0" Height="25" VerticalAlignment="Top"/>
                     <ListBox x:Name="listBox_mailing_list" Margin="127,10,10,10" ToolTip="A list of all your current mailing lists. To create, remove, or edit a list see the 'Mailing Lists' menu."/>
-                    <Button x:Name="button_new_list" Content="New List" Click="Menu_item_new_list_Click" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" ToolTip="Create a new mailing list. Opens a dialog.">
+                    <Button x:Name="button_new_list" Content="New List" Click="MenuIt_new_list_Click" HorizontalAlignment="Left" Margin="10,58,0,0" VerticalAlignment="Top" Width="75" ToolTip="Create a new mailing list. Opens a dialog.">
                         <Button.Effect>
                             <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
                         </Button.Effect>
                     </Button>
-                    <Button x:Name="button_edit_list" Content="Edit List" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Width="75" Click="Menu_item_edit_list_Click" ToolTip="Edit selected mailing list. Opens a dialog.">
+                    <Button x:Name="button_edit_list" Content="Edit List" HorizontalAlignment="Left" Margin="10,86,0,0" VerticalAlignment="Top" Width="75" Click="MenuIt_edit_list_Click" ToolTip="Edit selected mailing list. Opens a dialog.">
                         <Button.Effect>
                             <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
                         </Button.Effect>
                     </Button>
-                    <Button x:Name="button_remove_list" Content="Remove List" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="75" Click="Menu_item_remove_list_Click" ToolTip="Remove saved mailing lists. Opens a dialog.">
+                    <Button x:Name="button_remove_list" Content="Remove List" HorizontalAlignment="Left" Margin="10,114,0,0" VerticalAlignment="Top" Width="75" Click="MenuIt_remove_list_Click" ToolTip="Remove saved mailing lists. Opens a dialog.">
                         <Button.Effect>
                             <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
                         </Button.Effect>

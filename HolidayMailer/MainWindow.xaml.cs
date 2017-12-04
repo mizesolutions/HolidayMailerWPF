@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Reflection;
 using System.Windows;
 
 namespace HolidayMailer {
@@ -14,14 +16,19 @@ namespace HolidayMailer {
         private LaunchWindow launchRemoveList;
         private LaunchWindow launchRemoveContact;
         private LaunchWindow launchEditContactsWindow;
+        private LaunchWindow launchHelpWindow;
         private static LaunchWindow launchCredWindow;
+        private AssemblyInfo entryAssemblyInfo;
+        
+
+        #region Main Window
 
         public MainWindow() {
             InitializeComponent();
-
+            this.Closed += new EventHandler(MainWindow_Closed);
             CenterWindowOnScreen();
-
-            menu_item_logout.IsEnabled = false;
+            entryAssemblyInfo = new AssemblyInfo(Assembly.GetEntryAssembly());
+            menuIt_logout.IsEnabled = false;
 
             db = new Database();
             UpdateDataGrid();
@@ -60,6 +67,13 @@ namespace HolidayMailer {
                 UpdateDataGrid();
             };
 
+            launchHelpWindow = (window) => {
+                window.Top = 10;
+                window.Left = Left + Width;
+                if(!window.IsVisible)
+                    window.Show();
+            };
+
             UpdateDefaultLists();
             UpdateListBox();
         }
@@ -74,24 +88,51 @@ namespace HolidayMailer {
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
 
-        private void Button_new_contact_Click(object sender, RoutedEventArgs e) {
-            launchContact.Invoke(new MemberResult(db));
-        }
+#endregion
 
-        private void Menu_item_new_list_Click(object sender, RoutedEventArgs e) {
-            launchNewList.Invoke(new MailingListWindow(db));
-        }
+        #region Updaters
 
-        private void UpdateListBox() {
+        private void UpdateListBox()
+        {
             listBox_mailing_list.Items.Clear();
             db.LoadListBox(listBox_mailing_list, Queries.SelectAll(Database.ListsTable));
         }
 
-        private void UpdateDataGrid() {
+        private void UpdateDataGrid()
+        {
             db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
         }
 
-        private void Menu_item_edit_list_Click(object sender, RoutedEventArgs e) {
+        private void UpdateDefaultLists()
+        {
+            string allContacts = "All Contacts";
+            string sentMeMail = "Contacts who have sent me mail previously.";
+            db.InsertRecord(Queries.InsertList(allContacts));
+            db.InsertRecord(Queries.InsertList(sentMeMail));
+            List<Person> contacts = db.PersonQuery();
+            foreach (Person c in contacts)
+            {
+                db.InsertRecord(Queries.InsertMember(allContacts, c.Email));
+                if (c.Recieved)
+                {
+                    db.InsertRecord(Queries.InsertMember(sentMeMail, c.Email));
+                }
+            }
+        }
+
+#endregion
+
+        #region Click Functions
+
+        private void Button_new_contact_Click(object sender, RoutedEventArgs e) {
+            launchContact.Invoke(new MemberResult(db));
+        }
+
+        private void MenuIt_new_list_Click(object sender, RoutedEventArgs e) {
+            launchNewList.Invoke(new MailingListWindow(db));
+        }
+
+        private void MenuIt_edit_list_Click(object sender, RoutedEventArgs e) {
             if (listBox_mailing_list.SelectedValue != null) {
                 tab_Contacts.IsSelected = false;
                 tab_MailingLists.IsSelected = true;
@@ -101,6 +142,11 @@ namespace HolidayMailer {
             else {
                 MessageBox.Show(Application.Current.MainWindow, "Please select a list to edit and try again.", "List Selection");
             }
+        }
+
+        private void MenuIt_send_Click(object sender, RoutedEventArgs e)
+        {
+            Button_send_to_Click(sender, e);
         }
 
         private void Button_send_to_Click(object sender, RoutedEventArgs e) {
@@ -125,22 +171,22 @@ namespace HolidayMailer {
                 LaunchCredWindow();
                 if (Cred.CredReady())
                 {
-                    menu_item_login.IsEnabled = false;
-                    menu_item_logout.IsEnabled = true;
+                    menuIt_login.IsEnabled = false;
+                    menuIt_logout.IsEnabled = true;
                 }
             }
 
         }
 
-        private void Menu_item_new_contact_Click(object sender, RoutedEventArgs e) {
+        private void MenuIt_new_contact_Click(object sender, RoutedEventArgs e) {
             launchContact.Invoke(new MemberResult(db));
         }
 
-        private void Menu_item_edit_contact_Click(object sender, RoutedEventArgs e) {
+        private void MenuIt_edit_contact_Click(object sender, RoutedEventArgs e) {
             launchEditContactsWindow.Invoke(new EditContactWindow(db));
         }
 
-        private void Menu_item_remove_list_Click(object sender, RoutedEventArgs e) {
+        private void MenuIt_remove_list_Click(object sender, RoutedEventArgs e) {
             launchRemoveList(new RemoveListWindow(db));
         }
 
@@ -152,71 +198,24 @@ namespace HolidayMailer {
             launchEditContactsWindow.Invoke(new EditContactWindow(db));
         }
 
-        private void UpdateDefaultLists() {
-            string allContacts = "All Contacts";
-            string sentMeMail = "Contacts who have sent me mail previously.";
-            db.InsertRecord(Queries.InsertList(allContacts));
-            db.InsertRecord(Queries.InsertList(sentMeMail));
-            List<Person> contacts = db.PersonQuery();
-            foreach (Person c in contacts) {
-                db.InsertRecord(Queries.InsertMember(allContacts, c.Email));
-                if (c.Recieved) {
-                    db.InsertRecord(Queries.InsertMember(sentMeMail, c.Email));
-                }
-            }
-        }
-
         private void Button_filter_Click(object sender, RoutedEventArgs e) {
             if (textBox_filter.Text != null) {
                 db.LoadDataGrid(dataGrid_contacts, Queries.SelectContactsByLastName(textBox_filter.Text));
             }
-
         }
 
-        private void Menu_item_exit_Click(object sender, RoutedEventArgs e) {
+        private void MenuIt_exit_Click(object sender, RoutedEventArgs e) {
             Close();
         }
-
-
-        private void Menu_item_new_list_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = false;
-            tab_MailingLists.IsSelected = true;
-        }
-
-        private void Menu_item_edit_list_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = false;
-            tab_MailingLists.IsSelected = true;
-        }
-
-        private void Menu_item_remove_list_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = false;
-            tab_MailingLists.IsSelected = true;
-        }
-
-        private void Menu_item_new_contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = true;
-            tab_MailingLists.IsSelected = false;
-        }
-
-        private void Menu_item_edit_contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = true;
-            tab_MailingLists.IsSelected = false;
-        }
-
-        private void Menu_item_remove_contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
-        {
-            tab_Contacts.IsSelected = true;
-            tab_MailingLists.IsSelected = false;
-        }
-
-        private void Menu_item_login_Click(object sender, RoutedEventArgs e)
+        
+        private void MenuIt_login_Click(object sender, RoutedEventArgs e)
         {
             launchCredWindow.Invoke(new CredWindow());
+        }
+
+        private void MenuIt_help_click(object sender, RoutedEventArgs e)
+        {
+            launchHelpWindow(new Help());
         }
 
         public static void LaunchCredWindow()
@@ -224,7 +223,7 @@ namespace HolidayMailer {
             launchCredWindow.Invoke(new CredWindow());
         }
 
-        private void Menu_item_logout_Click(object sender, RoutedEventArgs e)
+        private void MenuIt_logout_Click(object sender, RoutedEventArgs e)
         {
             Cred.NetCred = new NetworkCredential();
             Cred.User = "";
@@ -235,11 +234,53 @@ namespace HolidayMailer {
                                                                 "In oder to send any new messages, you will be required\n" +
                                                                 "to log in again.", "Logout");
             }
-
-            menu_item_login.IsEnabled = true;
-            menu_item_logout.IsEnabled = false;
-
+           ChangeLogInOut(true);
         }
+
+        private void MenuIt_about_click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(Application.Current.MainWindow, entryAssemblyInfo.Company + "\n" +
+                                                            entryAssemblyInfo.Product + "\n" +
+                                                            entryAssemblyInfo.Copyright + "\n" +
+                                                            entryAssemblyInfo.Description + "\n" +
+                                                            "Version: " + entryAssemblyInfo.Version + "\n" +
+                                                            "64 bit/ 32 bit prefered", "About Holiday Mailer");
+        }
+
+        #endregion
+
+        #region Helper Methods
+
+        private void MenuIt_Mailing_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            tab_Contacts.IsSelected = false;
+            tab_MailingLists.IsSelected = true;
+        }
+
+        private void MenuIt_Contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            tab_Contacts.IsSelected = true;
+            tab_MailingLists.IsSelected = false;
+        }
+
+        public void ChangeLogInOut(bool value)
+        {
+            menuIt_login.IsEnabled = value;
+            menuIt_logout.IsEnabled = !value;
+        }
+
+        protected void MainWindow_Closed(object sender, EventArgs args)
+        {
+            CloseAllWindows();
+        }
+
+        private void CloseAllWindows()
+        {
+            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                App.Current.Windows[intCounter].Close();
+        }
+
+        #endregion
 
 
     }
