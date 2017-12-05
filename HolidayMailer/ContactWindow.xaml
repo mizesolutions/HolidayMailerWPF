@@ -3,34 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="Contact" Height="232.992" Width="377.459" ResizeMode="NoResize">
-    <Grid>
-        <Grid.Background>
+        Title="Add Contact" Height="240.999" Width="357" ResizeMode="NoResize">
+    <Grid Background="#FFBBCBD4">
+        <Grid Margin="3,0,3,3" Background="White">
+            <!--<Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF5B8D9C" Offset="1"/>
                 <GradientStop Color="#FF8BBECF"/>
                 <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
             </LinearGradientBrush>
-        </Grid.Background>
-        <Label x:Name="label_first_name" Content="First Name:" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_first_name" Height="23" Margin="82,14,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Label x:Name="label_last_name" Content="Last Name:" HorizontalAlignment="Left" Margin="10,41,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_last_name" Height="23" Margin="82,44,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <Label x:Name="label_email" Content="Email:" HorizontalAlignment="Left" Margin="10,72,0,0" VerticalAlignment="Top"/>
-        <TextBox x:Name="textBox_email" Height="23" Margin="82,75,47,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
-        <CheckBox x:Name="checkBox_previous_mailer" Content="Has sent me mail previously" HorizontalAlignment="Left" Margin="156,112,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="75,0,0,18" VerticalAlignment="Bottom" Width="75" Click="Button_save_Click">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
-            </Button.Effect>
-        </Button>
-        <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,75,18" VerticalAlignment="Bottom" Width="75" Click="button_cancel_Click">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
-            </Button.Effect>
-        </Button>
-
+        </Grid.Background>-->
+            <Label x:Name="label_first_name" Content="First Name:" HorizontalAlignment="Left" Margin="9,0,0,154" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+            <TextBox x:Name="textBox_first_name" Height="23" Margin="95,0,0,157" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="225"/>
+            <Label x:Name="label_last_name" Content="Last Name:" HorizontalAlignment="Left" Margin="10,0,0,128" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+            <TextBox x:Name="textBox_last_name" Height="23" Margin="95,0,0,129" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="225"/>
+            <Label x:Name="label_email" Content="Email:" HorizontalAlignment="Left" Margin="39,0,0,98" VerticalAlignment="Bottom" FontWeight="Bold" HorizontalContentAlignment="Right"/>
+            <TextBox x:Name="textBox_email" Height="23" Margin="95,0,0,101" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="225"/>
+            <CheckBox x:Name="checkBox_previous_mailer" Content="Has sent me mail previously" Margin="152,0,25,74" VerticalAlignment="Bottom"/>
+            <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="42,0,0,25" VerticalAlignment="Bottom" Width="75" Click="Button_save_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+            <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,42,25" VerticalAlignment="Bottom" Width="75" Click="button_cancel_Click">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
+                </Button.Effect>
+            </Button>
+        </Grid>
+        <Border BorderBrush="#FF59595B" BorderThickness="1" Height="11" Margin="-1,-10,-1,0" VerticalAlignment="Top" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
+            </Border.Effect>
+        </Border>
     </Grid>
 </Window>

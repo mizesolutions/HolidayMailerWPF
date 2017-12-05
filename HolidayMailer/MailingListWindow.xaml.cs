@@ -110,7 +110,7 @@ namespace HolidayMailer {
             var membersQuery = from member in members
                                where member.ListName == listName
                                select member;
-            foreach(Member m in members) {
+            foreach(Member m in membersQuery) {
                 listBox_members.Items.Add(m.Email);
                 emails.Add(m.Email);
             }

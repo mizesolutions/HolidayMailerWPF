@@ -19,7 +19,7 @@ namespace HolidayMailer {
         private LaunchWindow launchHelpWindow;
         private static LaunchWindow launchCredWindow;
         private AssemblyInfo entryAssemblyInfo;
-        
+
 
         #region Main Window
 
@@ -68,10 +68,18 @@ namespace HolidayMailer {
             };
 
             launchHelpWindow = (window) => {
-                window.Top = 10;
-                window.Left = Left + Width;
-                if(!window.IsVisible)
-                    window.Show();
+
+                Help form = Help.GetInstance();
+                if (form.Visibility != Visibility.Visible)
+                {
+                    form.Top = 0;
+                    form.Left = (Left + Width)-5;
+                    form.Show();
+                }
+                else
+                {
+                    form.Focus();
+                }
             };
 
             UpdateDefaultLists();
@@ -281,7 +289,5 @@ namespace HolidayMailer {
         }
 
         #endregion
-
-
     }
 }

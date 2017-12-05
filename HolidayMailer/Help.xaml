@@ -6,53 +6,62 @@
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
-        Title="Help" Height="927" Width="396" ResizeMode="NoResize">
-    <Grid>
-        <Grid.Background>
+        Title="Help" Height="936" Width="403" ResizeMode="NoResize">
+    <Grid Background="#FFBBCBD4">
+        <Grid Margin="3,0,3,3" Background="White">
+            <!--<Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF5B8D9C" Offset="1"/>
                 <GradientStop Color="#FF8BBECF"/>
                 <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
             </LinearGradientBrush>
-        </Grid.Background>
-        <TabControl Margin="10,10,10,71" BorderBrush="#FF444444" Background="#FF78878D">
-            <TabItem x:Name="tab_Contacts" Header="Contacts" BorderBrush="#FFE5E5E5">
-                <Grid Background="#FFE5E5E5" Margin="-5,-5,-5,-3">
-                    <GroupBox x:Name="newContact_group" Header="Add New Contact" HorizontalAlignment="Left" Height="190" Margin="10,10,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="newContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                    <GroupBox x:Name="editContact_group" Header="Edit Contacts" HorizontalAlignment="Left" Height="190" Margin="10,205,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="editContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                    <GroupBox x:Name="removeContact_group" Header="Remove Contacts" HorizontalAlignment="Left" Height="190" Margin="10,400,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="removeContact_text" Margin="10,0,2,2" TextWrapping="Wrap" FontWeight="Normal" Height="156" VerticalAlignment="Bottom"/>
-                    </GroupBox>
-                    <GroupBox x:Name="searchContact_group" Header="Search Contacts" HorizontalAlignment="Left" Height="190" Margin="10,595,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="searchContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-            <TabItem x:Name="tab_MailingList" Header="Mailing List" BorderBrush="#FFE5E5E5">
-                <Grid Background="#FFE5E5E5" Margin="-5,-5,-5,-5">
-                    <GroupBox x:Name="sendMail_group" Header="Send Mail" HorizontalAlignment="Left" Height="190" Margin="10,10,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="sendMail_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                    <GroupBox x:Name="newMailList_group" Header="New Mailing List" HorizontalAlignment="Left" Height="190" Margin="10,205,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="newMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                    <GroupBox x:Name="editMailList_group" Header="Edit Mail List" HorizontalAlignment="Left" Height="190" Margin="10,400,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="editMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                    <GroupBox x:Name="removedMailList_group" Header="Remove Mail List" HorizontalAlignment="Left" Height="190" Margin="10,595,0,0" VerticalAlignment="Top" Width="352" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
-                        <TextBlock x:Name="removeMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
-                    </GroupBox>
-                </Grid>
-            </TabItem>
-        </TabControl>
-        <Grid Height="66" VerticalAlignment="Bottom">
-            <Button x:Name="btn_Close" Content="Close" Margin="142,0,143,18" Width="75" Click="Btn_Close_Click" Height="23" VerticalAlignment="Bottom"/>
+        </Grid.Background>-->
+            <TabControl Margin="10,0,10,60" BorderBrush="#FF444444" Background="#FF78878D" Height="814" VerticalAlignment="Bottom">
+                <TabItem x:Name="tab_Contacts" Header="Contacts" BorderBrush="#FFE5E5E5">
+                    <Grid Background="#FFE5E5E5" Margin="-5,-5,-5,-3">
+                        <GroupBox x:Name="newContact_group" Header="Add New Contact" Height="190" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="newContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                        <GroupBox x:Name="editContact_group" Header="Edit Contacts" Height="190" Margin="10,205,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="editContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                        <GroupBox x:Name="removeContact_group" Header="Remove Contacts" Height="190" Margin="10,400,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="removeContact_text" Margin="10,0,2,2" TextWrapping="Wrap" FontWeight="Normal" Height="156" VerticalAlignment="Bottom"/>
+                        </GroupBox>
+                        <GroupBox x:Name="searchContact_group" Header="Search Contacts" Height="190" Margin="10,595,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="searchContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+                <TabItem x:Name="tab_MailingList" Header="Mailing List" BorderBrush="#FFE5E5E5">
+                    <Grid Background="#FFE5E5E5" Margin="-5,-5,-5,-5">
+                        <GroupBox x:Name="sendMail_group" Header="Send Mail" Height="190" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="sendMail_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                        <GroupBox x:Name="newMailList_group" Header="New Mailing List" Height="190" Margin="10,205,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="newMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                        <GroupBox x:Name="editMailList_group" Header="Edit Mail List" Height="190" Margin="10,400,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="editMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                        <GroupBox x:Name="removedMailList_group" Header="Remove Mail List" Height="190" Margin="10,595,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" Grid.IsSharedSizeScope="True" BorderBrush="#FFA0A4A6">
+                            <TextBlock x:Name="removeMailList_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
+                        </GroupBox>
+                    </Grid>
+                </TabItem>
+            </TabControl>
+            <Grid Background="#FF737981" Margin="0,0,0,0" Height="61" VerticalAlignment="Bottom">
+                <Button x:Name="btn_Close" Content="Close" Margin="136,0,136,20" Click="Btn_Close_Click" Height="23" VerticalAlignment="Bottom">
+                    <Button.Effect>
+                        <DropShadowEffect BlurRadius="2" Color="#FF212020" Opacity="0.65" ShadowDepth="1"/>
+                    </Button.Effect>
+                </Button>
+            </Grid>
         </Grid>
-
-
+        <Border BorderBrush="#FF59595B" BorderThickness="1" Height="11" Margin="-1,-10,-1,0" VerticalAlignment="Top" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
+            </Border.Effect>
+        </Border>
     </Grid>
 </Window>

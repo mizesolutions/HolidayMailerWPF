@@ -3,8 +3,10 @@ using System.Windows.Media;
 
 namespace HolidayMailer {
 
-    public partial class MemberResult : Window {
+    public partial class MemberResult : Window
+    {
         private Database db;
+
         public MemberResult(Database db) {
             InitializeComponent();
             CenterWindowOnScreen();
@@ -31,23 +33,41 @@ namespace HolidayMailer {
                 db.InsertRecord(record);
                 Close();
             }
+            else
+            {
+                MessageBox.Show(Application.Current.MainWindow, "Please fill in all fields or click cancel.", "Add Contact Error");
+                this.Focus();
+            }
         }
 
         private bool IsValid() {
             bool valid = true;
-            if(textBox_first_name.Text == null || textBox_first_name.Text == "") {
-                textBox_first_name.Background = Brushes.Red;
+            if (textBox_first_name.Text == null || textBox_first_name.Text == "")
+            {
+                textBox_first_name.Background = Brushes.MistyRose;
                 valid = false;
+            }
+            else
+            {
+                textBox_first_name.Background = Brushes.White;
             }
 
             if(textBox_last_name.Text == null || textBox_last_name.Text == "") {
-                textBox_last_name.Background = Brushes.Red;
+                textBox_last_name.Background = Brushes.MistyRose;
                 valid = false;
             }
+            else
+            {
+                textBox_last_name.Background = Brushes.White;
+            }
 
-            if(textBox_email.Text == null || textBox_email.Text == "") {
-                textBox_email.Background = Brushes.Red;
+            if (textBox_email.Text == null || textBox_email.Text == "") {
+                textBox_email.Background = Brushes.MistyRose;
                 valid = false;
+            }
+            else
+            {
+                textBox_email.Background = Brushes.White;
             }
 
             return valid;

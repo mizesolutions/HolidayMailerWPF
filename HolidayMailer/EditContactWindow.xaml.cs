@@ -41,7 +41,7 @@ namespace HolidayMailer {
                 db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
             }
             else {
-                MessageBox.Show(Application.Current.MainWindow, "Please select a contact and try again.", "Contact Selection");
+                MessageBox.Show(Application.Current.MainWindow, "Please select a contact to edit or click close to return to main window.", "Contact Selection");
                 this.Focus();
             }
         }
@@ -62,7 +62,7 @@ namespace HolidayMailer {
             db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));  
         }
 
-        private void dataGrid_contacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+        private void DataGrid_contacts_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             if (dataGrid_contacts.SelectedItems.Count > 0) {
                 DataRowView row = (DataRowView)dataGrid_contacts.SelectedItems[0];
                 string oldFName = row["FirstName"].ToString();
@@ -76,7 +76,7 @@ namespace HolidayMailer {
             }
         }
 
-        private void button_cancel_Click(object sender, RoutedEventArgs e) {
+        private void Button_cancel_Click(object sender, RoutedEventArgs e) {
             Close();
         }
     }

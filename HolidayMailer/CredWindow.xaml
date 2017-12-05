@@ -5,33 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
-        Title="CredWindow" Height="417" Width="499" ResizeMode="NoResize">
-    <Grid>
-        <Grid.Background>
+        Title="Google Login" Height="417" Width="418" ResizeMode="NoResize">
+    <Grid Background="#FFBBCBD4">
+        <Grid Background="White" Margin="3,0,3,3">
+            <!--<Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                 <GradientStop Color="#FF5B8D9C" Offset="1"/>
                 <GradientStop Color="#FF8BBECF"/>
                 <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
             </LinearGradientBrush>
-        </Grid.Background>
-        <Image Height="85" Margin="120,10,120,0" VerticalAlignment="Top" Source="google_2015.png"/>
-        <TextBlock x:Name="textBlock_instructions" Margin="40,108,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="56"><Bold><Underline><Run Text="Note:"/></Underline></Bold><Run Text=" If your Google account is enabled with 2-factor authentication you will need to generate an App password in your Google account. You will use that app password in place of your password."/></TextBlock>
-        <TextBlock Margin="40,171,40,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold" HorizontalAlignment="Center" Width="413"><Run Text="    "/><Hyperlink NavigateUri="https://myaccount.google.com/intro/security" RequestNavigate="Hyperlink_RequestNavigate" Focusable="False"><Run Text="Click here for more information "/></Hyperlink></TextBlock>
-        <StackPanel FocusManager.FocusedElement="{Binding ElementName=txtBx_User}">
-            <TextBox x:Name="txtBx_User" HorizontalAlignment="Left" Height="20" Margin="144,230,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="211" TabIndex="1" />
-        </StackPanel>
-        <Label Content="User:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69" Margin="70,226,0,0"/>
-        <Label Content="Password:" HorizontalAlignment="Left" Margin="70,252,0,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69"/>
-        <PasswordBox x:Name="pwdBx_pwd" HorizontalAlignment="Left" Height="20" Margin="144,258,0,0" VerticalAlignment="Top" Width="211" TabIndex="2"/>
-        <Button x:Name="btn_submit" Content="Submit" HorizontalAlignment="Left" Margin="120,315,0,0" VerticalAlignment="Top" Width="75" Click="Btn_submit_Click" TabIndex="3">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
-            </Button.Effect>
-        </Button>
-        <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,315,120,0" VerticalAlignment="Top" Width="75" Click="Btn_cancel_Click" TabIndex="4">
-            <Button.Effect>
-                <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
-            </Button.Effect>
-        </Button>
+        </Grid.Background>-->
+            <Image Height="65" Margin="106,29,106,0" VerticalAlignment="Top" Source="original_images_Google_Logo_SM.png"/>
+            <TextBlock x:Name="textBlock_instructions" Margin="40,113,40,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="72"><Bold><Underline><Run Text="Note:"/></Underline></Bold><Run Text=" If your Google account is enabled with 2-factor authentication you will need to generate an App password in your Google account. You will use that app password in place of your password."/></TextBlock>
+            <TextBlock Margin="37,189,37,0" TextWrapping="Wrap" VerticalAlignment="Top" FontWeight="Bold"><Run Text="    "/><Hyperlink NavigateUri="https://myaccount.google.com/intro/security" RequestNavigate="Hyperlink_RequestNavigate" Focusable="False"><Run Text="Click here for more information "/></Hyperlink></TextBlock>
+            <StackPanel FocusManager.FocusedElement="{Binding ElementName=txtBx_User}">
+                <TextBox x:Name="txtBx_User" Height="20" Margin="128,230,77,0" TextWrapping="Wrap" VerticalAlignment="Top" TabIndex="1" />
+            </StackPanel>
+            <Label Content="User:" HorizontalAlignment="Left" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="50" Margin="74,226,0,0"/>
+            <Label Content="Password:" HorizontalAlignment="Left" Margin="55,248,0,0" VerticalAlignment="Top" Height="30" HorizontalContentAlignment="Right" VerticalContentAlignment="Bottom" FontWeight="Bold" Width="69"/>
+            <PasswordBox x:Name="pwdBx_pwd" Height="20" Margin="128,258,77,0" VerticalAlignment="Top" TabIndex="2"/>
+            <Button x:Name="btn_submit" Content="Submit" HorizontalAlignment="Left" Margin="65,315,0,0" VerticalAlignment="Top" Width="75" Click="Btn_submit_Click" TabIndex="3">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
+                </Button.Effect>
+            </Button>
+            <Button x:Name="btn_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,315,77,0" VerticalAlignment="Top" Width="75" Click="Btn_cancel_Click" TabIndex="4">
+                <Button.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF888B8B"/>
+                </Button.Effect>
+            </Button>
+        </Grid>
+        <Border BorderBrush="#FF59595B" BorderThickness="1" Height="11" Margin="-1,-10,-1,0" VerticalAlignment="Top" >
+            <Border.Effect>
+                <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
+            </Border.Effect>
+        </Border>
     </Grid>
 </Window>

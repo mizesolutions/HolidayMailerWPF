@@ -1,18 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace HolidayMailer
 {
@@ -30,6 +19,15 @@ namespace HolidayMailer
 
         [DllImport("user32.dll")]
         private static extern int SetWindowLong(IntPtr hWnd, int nIndex, int dwNewLong);
+
+        private static Help _instance;
+
+        public static Help GetInstance()
+        {
+            if (_instance == null) _instance = new Help();
+            return _instance;
+        }
+
 
         public Help()
         {
@@ -116,7 +114,7 @@ namespace HolidayMailer
             newMailList_text.Text = "To Create a New Mailing List: \n" +
                                    "- Select New List from the Mailing Lists drop down\n" +
                                    "   OR \n" +
-                                   "- Click the New List button on the Mailing List tab pagee\n" +
+                                   "- Click the New List button on the Mailing List tab page\n" +
                                    "\n" +
                                    "A new window will open that will allow you to create the\n" +
                                    "list using your saved contacts. Click the save button\n" +
@@ -128,7 +126,7 @@ namespace HolidayMailer
             editMailList_text.Text = "To Edit a Mailing List: \n" +
                                      "- Select Edit List from the Mailing Lists drop down\n" +
                                      "   OR \n" +
-                                     "- Click the Edit List button on the Mailing List tab pagee\n" +
+                                     "- Click the Edit List button on the Mailing List tab page\n" +
                                      "\n" +
                                      "A new window will open that will allow you to edit any\n" +
                                      "list you have created. Click the save button\n" +
@@ -140,7 +138,7 @@ namespace HolidayMailer
             removeMailList_text.Text = "To Remove Mailing List: \n" +
                                        "- Select Remove List from the Mailing Lists drop down\n" +
                                        "   OR \n" +
-                                       "- Click the Remove List botton on the Mailing List tab pagee\n" +
+                                       "- Click the Remove List botton on the Mailing List tab page\n" +
                                        "\n" +
                                        "A new window will open that will allow you to remove any\n" +
                                        "list you have created. Click the save button\n" +
@@ -150,6 +148,7 @@ namespace HolidayMailer
 
         private void Btn_Close_Click(object sender, RoutedEventArgs e)
         {
+            _instance = null;
             Close();
         }
     }

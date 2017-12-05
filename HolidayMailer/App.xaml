@@ -1,15 +1,14 @@
 ﻿<Application x:Class="HolidayMailer.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:HolidayMailer"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!--Control colors.-->
-            <Color x:Key="ControlNormalColor">#FFC0C0CE</Color>
-            <Color x:Key="ControlMouseOverColor">#FFAFA3B9</Color>
+            <Color x:Key="ControlNormalColor">#FFB0C4DE</Color>
+            <Color x:Key="ControlMouseOverColor">#FF99A7FD</Color>
             <Color x:Key="DisabledControlColor">#FFF2F2F2</Color>
             <Color x:Key="DisabledForegroundColor">#FFBFBFBF</Color>
-            <Color x:Key="ControlPressedColor">#FF211AA9</Color>
+            <Color x:Key="ControlPressedColor">#FF4163BD</Color>
 
         <!--<Color x:Key="ControlNormalColor">#FFC0C0CE</Color>
         <Color x:Key="ControlMouseOverColor">#FFAFA3B9</Color>
@@ -39,7 +38,7 @@
             <Setter Property="MinHeight" Value="23px" />
             <Setter Property="MinWidth"  Value="103px" />
             <Setter Property="FontWeight"  Value="Bold" />
-            <Setter Property="Foreground" Value="#FFFFFFFF" />
+            <Setter Property="Foreground" Value="Black" />
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
