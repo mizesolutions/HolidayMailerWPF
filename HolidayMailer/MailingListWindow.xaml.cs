@@ -86,7 +86,7 @@ namespace HolidayMailer {
             bool valid = true;
             if (textBox_name.Text == null || textBox_name.Text == "") {
                 valid = false;
-                textBox_name.Background = Brushes.Red;
+                textBox_name.Background = Brushes.MistyRose;
             }
             if (listBox_members.Items.Count <= 0) {
                 valid = false;

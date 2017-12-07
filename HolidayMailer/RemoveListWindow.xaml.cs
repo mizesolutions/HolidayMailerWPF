@@ -37,7 +37,7 @@ namespace HolidayMailer {
             }
             catch (Exception ex)
             {
-                MessageBox.Show(Application.Current.MainWindow, "Please select a list to remove or click cancel.", "Rmove List");
+                MessageBox.Show(Application.Current.MainWindow, "Please select a list to remove or click close to return to the main window.", "Rmove List");
                 this.Focus();
             }
 

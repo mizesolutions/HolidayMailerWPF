@@ -24,14 +24,19 @@ namespace HolidayMailer {
             this.Left = (screenWidth / 2) - (windowWidth / 2);
             this.Top = (screenHeight / 2) - (windowHeight / 2);
         }
-
+    
         private void Button_remove_Click(object sender, RoutedEventArgs e) {
-            if (dataGrid_contacts.SelectedItems.Count > 0) {
-                DataRowView row = (DataRowView)dataGrid_contacts.SelectedItems[0];
+
+            DataRowView row = dataGrid_contacts.SelectedItems[0] as DataRowView;
+
+            if (row != null && row[0] != null) {
+
+                //DataRowView row = (DataRowView)dataGrid_contacts.SelectedItems[0];
                 string email = row["Email"].ToString();
                 db.ExecuteDbQuery(Queries.DeleteContact(email));
                 db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
                 db.ExecuteDbQuery(Queries.DeleteMemberByEmail(email));
+                dataGrid_contacts.SelectedItems.Clear();
             }
         }
 

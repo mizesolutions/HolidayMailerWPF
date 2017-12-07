@@ -21,7 +21,7 @@
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="button_exit" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,85,17" Width="75" Click="Button_exit_Click" Height="20" VerticalAlignment="Bottom">
+            <Button x:Name="button_exit" Content="Close" HorizontalAlignment="Right" Margin="0,0,85,17" Width="75" Click="Button_exit_Click" Height="20" VerticalAlignment="Bottom">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>

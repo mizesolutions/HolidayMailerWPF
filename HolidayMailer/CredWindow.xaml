@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
+        Icon="gmail.ico"
         Title="Google Login" Height="417" Width="418" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Background="White" Margin="3,0,3,3">

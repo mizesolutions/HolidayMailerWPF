@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Text.RegularExpressions;
+using System.Windows;
 using System.Windows.Media;
 
 namespace HolidayMailer {
@@ -35,13 +36,16 @@ namespace HolidayMailer {
             }
             else
             {
-                MessageBox.Show(Application.Current.MainWindow, "Please fill in all fields or click cancel.", "Add Contact Error");
+                MessageBox.Show(Application.Current.MainWindow, "Please fill in all fields and check that the email is valid or click close to return to the main window.", "Add Contact Error");
                 this.Focus();
             }
         }
 
         private bool IsValid() {
             bool valid = true;
+            Regex rgx = new Regex(@"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$");
+
+
             if (textBox_first_name.Text == null || textBox_first_name.Text == "")
             {
                 textBox_first_name.Background = Brushes.MistyRose;
@@ -61,7 +65,7 @@ namespace HolidayMailer {
                 textBox_last_name.Background = Brushes.White;
             }
 
-            if (textBox_email.Text == null || textBox_email.Text == "") {
+            if (!rgx.IsMatch(textBox_email.Text)) {
                 textBox_email.Background = Brushes.MistyRose;
                 valid = false;
             }

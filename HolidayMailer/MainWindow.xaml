@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        Icon="flatt3d_gift_512_8jF_icon.ico"
         Title="Holiday Mailer" Height="362" Width="524" MinHeight="475" MinWidth="675" MaxHeight="1475" MaxWidth="1675" BorderBrush="#FF6BF55D">
     <Grid Background="#FFBBCBD4">
         <Grid Margin="3,0,3,3" Background="White">
@@ -17,7 +18,7 @@
             </LinearGradientBrush>
         </Grid.Background>-->
 
-        <Menu x:Name="menu" Height="19" VerticalAlignment="Top" Background="#FFCDCDCD">
+        <Menu x:Name="menu" Height="25" VerticalAlignment="Top" Background="#FFCDCDCD" FontSize="14">
             <Menu.Effect>
                 <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
             </Menu.Effect>
@@ -44,7 +45,7 @@
                 <MenuItem x:Name="menuIt_help" Header="Help" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Click="MenuIt_help_click" />
             </MenuItem>
         </Menu>
-        <TabControl Margin="0,24,0,0" Background="White" BorderBrush="#FF7E7E7E">
+        <TabControl Margin="0,30,0,0" Background="White" BorderBrush="#FF7E7E7E">
             <TabControl.Resources>
                 <Style TargetType="TabItem">
                     <Setter Property="Template">
@@ -73,10 +74,10 @@
                 <TabControl.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
                 </TabControl.Effect>
-                <TabItem x:Name="tab_Contacts" Header="Contacts" Cursor="Hand" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}">
+                <TabItem x:Name="tab_Contacts" Header="Contacts" Cursor="Hand" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" FontSize="14">
                     <Grid x:Name="tab_grid_contacts" Margin="0,0,0,0" Background="White">
-                        <TextBox x:Name="textBox_filter" HorizontalAlignment="Right" Height="23" Margin="0,10,153,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" BorderBrush="#FF7C7C7C"/>
-                    <Button x:Name="button_filter" Content="Search By Last Name" Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_filter_Click" ToolTip="Enter a search string to filter the contact list. Note: Only searches against last names at this time." HorizontalAlignment="Right" Width="138">
+                        <TextBox x:Name="textBox_filter" HorizontalAlignment="Right" Height="23" Margin="0,10,181,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="188" BorderBrush="#FF7C7C7C"/>
+                    <Button x:Name="button_filter" Content="Search By Last Name" Margin="0,10,10,0" VerticalAlignment="Top" Height="23" Click="Button_filter_Click" ToolTip="Enter a search string to filter the contact list. Note: Only searches against last names at this time." HorizontalAlignment="Right" Width="166">
                         <Button.Effect>
                             <DropShadowEffect BlurRadius="2" Color="#FF8B8B8B" Opacity="0.65" ShadowDepth="1"/>
                         </Button.Effect>
@@ -99,7 +100,7 @@
                     </Button>
                 </Grid>
             </TabItem>
-            <TabItem x:Name="tab_MailingLists" Header="Mailing List" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Cursor="Hand">
+            <TabItem x:Name="tab_MailingLists" Header="Mailing List" FontWeight="{DynamicResource {x:Static SystemFonts.MenuFontWeightKey}}" Cursor="Hand" FontSize="14">
                     <Grid x:Name="tab_grid_mailinglist" Margin="0,0,0,0" Background="White">
                         <Button x:Name="button_send_to" Content="Send Mail" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_send_to_Click" ToolTip="Log in first to send mail to each contact in the currently selected list. Opens a dialog.">
                         <Button.Effect>
