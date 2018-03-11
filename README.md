@@ -10,6 +10,6 @@ The user can:
  - Send email to a single recipient or a list of recipients
 
 
- Contacts and mailing lists are maintained in a sqlite database in order to make the application small and easily portable.
+ Contacts and mailing lists are maintained in a SQLite database in order to make the application small and easily portable.
 
  Sending mail with this application requires the user to have a valid Gmail account. For users that employ 2-factor authentication with their Gmail account, there is a link on the authentication window that will take the user to a Google page where an application password can be created for use with the Holiday Mailer application.
