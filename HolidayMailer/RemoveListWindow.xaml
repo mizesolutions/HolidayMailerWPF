@@ -3,25 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Title="Remove List" Height="330.881" Width="538.738" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Margin="3,0,3,3" Background="White">
-            <!--<Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B8D9C" Offset="1"/>
-                <GradientStop Color="#FF8BBECF"/>
-                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
-            </LinearGradientBrush>
-        </Grid.Background>-->
             <ListBox x:Name="listBox_mailingLists" Height="215" Margin="10,0,10,55" VerticalAlignment="Bottom"/>
-            <Button x:Name="button_remove" Content="Remove" Margin="100,0,0,17" VerticalAlignment="Bottom" Click="Button_remove_Click" HorizontalAlignment="Left" Width="77">
+            <Button x:Name="button_remove" Content="Remove" Margin="100,0,0,17" VerticalAlignment="Bottom" Click="BtnRemoveClick" HorizontalAlignment="Left" Width="77">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="button_cancel" Content="Close" Margin="0,0,100,17" VerticalAlignment="Bottom" Click="Button_cancel_Click" HorizontalAlignment="Right" Width="77">
+            <Button x:Name="button_cancel" Content="Close" Margin="0,0,100,17" VerticalAlignment="Bottom" Click="BtnCloseClick" HorizontalAlignment="Right" Width="77">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>

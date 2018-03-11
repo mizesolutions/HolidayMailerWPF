@@ -3,34 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Title="Send Mail" Height="580.995" Width="503" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Margin="3,0,3,3" Background="White">
-            <!--<Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B8D9C" Offset="1"/>
-                <GradientStop Color="#FF8BBECF"/>
-                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
-            </LinearGradientBrush>
-        </Grid.Background>-->
             <Label x:Name="label_to" Content="To:" HorizontalAlignment="Left" Margin="20,0,0,489" VerticalAlignment="Bottom" Width="65" HorizontalContentAlignment="Right" FontWeight="Bold"/>
             <Label x:Name="label_subject" Content="Subject:" HorizontalAlignment="Left" Margin="20,0,0,405" VerticalAlignment="Bottom" HorizontalContentAlignment="Right" Width="65" FontWeight="Bold"/>
             <TextBox x:Name="textBox_to" Height="80" Margin="100,0,20,433" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" TabIndex="3"/>
             <TextBox x:Name="textBox_subject" Height="23" Margin="100,0,20,405" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" TabIndex="4"/>
-            <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="90,0,0,27" VerticalAlignment="Bottom" Width="75" Click="Button_send_Click" Focusable="False" TabIndex="8">
+            <Button x:Name="button_send" Content="Send" HorizontalAlignment="Left" Margin="90,0,0,27" VerticalAlignment="Bottom" Width="75" Click="BtnSendClick" Focusable="False" TabIndex="8">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,90,27" VerticalAlignment="Bottom" Width="75" Click="Button_cancel_Click" Focusable="False" TabIndex="9">
+            <Button x:Name="button_cancel" Content="Cancel" HorizontalAlignment="Right" Margin="0,0,90,27" VerticalAlignment="Bottom" Width="75" Click="BtnCloseClick" Focusable="False" TabIndex="9">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
                 </Button.Effect>
             </Button>
             <TextBox x:Name="textBox_attatch" Height="23" Margin="128,0,20,377" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" TabIndex="7"/>
-            <Button x:Name="button_attatch" Content="Attatch" HorizontalAlignment="Left" Margin="20,0,0,377" VerticalAlignment="Bottom" Width="65" Click="Button_attatch_Click" Focusable="False" TabIndex="6">
+            <Button x:Name="button_attatch" Content="Attatch" HorizontalAlignment="Left" Margin="20,0,0,377" VerticalAlignment="Bottom" Width="65" Click="BtnAttatchClick" Focusable="False" TabIndex="6">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Color="#FF888B8B" Opacity="0.65" ShadowDepth="1"/>
                 </Button.Effect>

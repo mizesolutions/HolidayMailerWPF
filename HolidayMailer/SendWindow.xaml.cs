@@ -6,103 +6,147 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace HolidayMailer {
+namespace HolidayMailer
+{
+    /// <summary>
+    /// Handles sending email messages with optional attachments to selected recip[ients.
+    /// </summary>
+    public partial class SendWindow
+    {
+        public string SmtpServer { get; } = "smtp.gmail.com";
+        public int Port { get; } = 587;
+        public List<string> EmailRecipients { get; set; }
+        public string Subject { get; set; }
+        public string Body { get; set; }
+        public string AttachmentPath { get; set; }
 
-    public partial class SendWindow : Window {
-        private const string smtpServer = "smtp.gmail.com";
-        private const int port = 587;
-        private List<string> emailRecipients;
-        private string subject;
-        private string body;
-        private string attachmentPath;
 
-        public SendWindow(List<string> recipients) {
+        public SendWindow(List<string> recipients)
+        {
             InitializeComponent();
             CenterWindowOnScreen();
-            emailRecipients = recipients;
-            var temp = emailRecipients.Aggregate("", (current, email) => current + (email + ", "));
+            EmailRecipients = recipients;
+            var temp = EmailRecipients.Aggregate("", (current, email) => current + (email + ", "));
             textBox_to.Text = temp.Substring(0, temp.Length - 2);
         }
 
+        /// <summary>
+        /// Centers the window.
+        /// </summary>
         private void CenterWindowOnScreen()
         {
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-            double windowWidth = this.Width;
-            double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
+            Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
         }
 
-        private void SendMessages() {
+        /// <summary>
+        /// Sneds email message to all recipients
+        /// </summary>
+        private void SendMessages()
+        {
             if (!IsValid()) return;
             CollectInfo();
-            try {
-                var client = new SmtpClient(smtpServer, port) {
-                    Credentials = Cred.NetCred,
+            try
+            {
+                var client = new SmtpClient(SmtpServer, Port)
+                {
+                    Credentials = Credential.NetworkCredential,
                     EnableSsl = true
                 };
-                foreach (string email in emailRecipients) {
-                    MailMessage message = new MailMessage(Cred.User, email, subject, body);
-                    if (!string.IsNullOrEmpty(attachmentPath)) {
-                        Attachment attachment = new Attachment(attachmentPath);
+                foreach (var email in EmailRecipients)
+                {
+                    var message = new MailMessage(Credential.User, email, Subject, Body);
+                    if (!string.IsNullOrEmpty(AttachmentPath))
+                    {
+                        var attachment = new Attachment(AttachmentPath);
                         message.Attachments.Add(attachment);
                     }
                     client.Send(message);
                     Close();
                 }
             }
-            catch (Exception e) {
+            catch (Exception e)
+            {
                 MessageBox.Show(Application.Current.MainWindow, e.HResult + e.HelpLink + "\n\nPlease login again.", "Auth Error");
                 Close();
                 MainWindow.LaunchCredWindow();
             }
         }
 
-        private bool IsValid() {
+        /// <summary>
+        /// Checks if all form text is valid
+        /// </summary>
+        /// <returns></returns>
+        private bool IsValid()
+        {
             ResestBackgrounds();
-            bool valid = true;
-            valid = TestTextBox(textBox_body);
-            valid = TestTextBox(textBox_subject);
-            valid = TestTextBox(textBox_to);
-            return valid;
+            return TestTextBox(textBox_body) && TestTextBox(textBox_subject) && TestTextBox(textBox_to);
         }
 
-        private void CollectInfo() {
-            subject = textBox_subject.Text;
-            body = textBox_body.Text;
+        /// <summary>
+        /// Groups form data
+        /// </summary>
+        private void CollectInfo()
+        {
+            Subject = textBox_subject.Text;
+            Body = textBox_body.Text;
         }
 
-        private void ResestBackgrounds() {
+        /// <summary>
+        /// Resets form test box background after invalid data corrected
+        /// </summary>
+        private void ResestBackgrounds()
+        {
             textBox_body.Background = Brushes.White;
             textBox_subject.Background = Brushes.White;
             textBox_to.Background = Brushes.White;
         }
 
-        private bool TestTextBox(TextBox tb) {
-            if (string.IsNullOrEmpty(tb.Text)) {
-                tb.Background = Brushes.Red;
-                return false;
-            }
-            return true;
+        /// <summary>
+        /// Changes textbox background color if text is invalid
+        /// </summary>
+        /// <param name="textbox"></param>
+        /// <returns></returns>
+        private bool TestTextBox(TextBox textbox)
+        {
+            if (!string.IsNullOrEmpty(textbox.Text)) return true;
+            textbox.Background = Brushes.Red;
+            return false;
         }
-     
-        private void Button_send_Click(object sender, RoutedEventArgs e) {
+
+        /// <summary>
+        /// Calls send function on click
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSendClick(object sender, RoutedEventArgs e)
+        {
             SendMessages();
         }
 
-        private void Button_cancel_Click(object sender, RoutedEventArgs e) {
+        /// <summary>
+        /// Closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCloseClick(object sender, RoutedEventArgs e)
+        {
             Close();
         }
 
-        private void Button_attatch_Click(object sender, RoutedEventArgs e) {
-            var dlg = new Microsoft.Win32.OpenFileDialog();
-            bool? result = dlg.ShowDialog();
+        /// <summary>
+        /// Allows user to attach files to send
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAttatchClick(object sender, RoutedEventArgs e)
+        {
+            var dialog = new Microsoft.Win32.OpenFileDialog();
+            var result = dialog.ShowDialog();
             if (result != true) return;
-            attachmentPath = dlg.FileName;
-            textBox_attatch.Text = attachmentPath;
+            AttachmentPath = dialog.FileName;
+            textBox_attatch.Text = AttachmentPath;
         }
-       
 
     }
 }

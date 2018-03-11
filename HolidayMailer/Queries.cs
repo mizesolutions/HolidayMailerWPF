@@ -1,88 +1,176 @@
 ﻿using System;
 
-namespace HolidayMailer {
-    class Queries {
-
-        public static string InsertContact(string firstName, string lastName, string email, bool recieved) {
+namespace HolidayMailer
+{
+    /// <summary>
+    /// Holds all queries for database operations.
+    /// </summary>
+    class Queries
+    {
+        /// <summary>
+        /// Inserts contact
+        /// </summary>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="email"></param>
+        /// <param name="recieved"></param>
+        /// <returns></returns>
+        public static string InsertContact(string firstName, string lastName, string email, bool recieved)
+        {
             if (firstName == null || lastName == null || email == null) throw new ArgumentNullException();
-            string q = String.Format("INSERT OR IGNORE INTO {0} (FirstName, LastName, Email, RecievedMail) values ('{1}', '{2}', '{3}', '{4}')",
-                Database.ContactsTable,
-                firstName,
-                lastName,
-                email,
-                recieved
-                );
+            var q = $"INSERT OR IGNORE INTO {Database.ContactsTable} (FirstName, LastName, Email, RecievedMail) values ('{firstName}', '{lastName}', '{email}', '{recieved}')";
             return q;
         }
 
-        public static string InsertList(string ListName) {
-            if (ListName == null) throw new ArgumentNullException();
-            string q = String.Format("INSERT OR IGNORE INTO {0} (ListName) values ('{1}')", Database.ListsTable, ListName);
-            return q;
-        }
-
-        public static string InsertMember(string ListName, string Email) {
-            if (ListName == null || Email == null) throw new ArgumentNullException();
-            string q = String.Format("INSERT OR IGNORE INTO {0} (ListName, Email) VALUES ('{1}', '{2}')", Database.ListMembersTable, ListName, Email);
-            return q;
-        }
-
-        public static string DeleteContact(string email) {
-            if (email == null) throw new ArgumentNullException();
-            string q = String.Format("DELETE FROM {0} WHERE Email = '{1}'", Database.ContactsTable, email);
-            return q;
-        }
-
-        public static string DeleteList(string name) {
-            if (name == null) throw new ArgumentNullException();
-            string q = String.Format("DELETE FROM {0} WHERE ListName = '{1}'", Database.ListsTable, name);
-            return q;
-        }
-
-        public static string DeleteMemberByList(string listName) {
+        /// <summary>
+        /// Inserts list
+        /// </summary>
+        /// <param name="listName"></param>
+        /// <returns></returns>
+        public static string InsertList(string listName)
+        {
             if (listName == null) throw new ArgumentNullException();
-            string q = String.Format("DELETE FROM {0} WHERE ListName = '{1}'", Database.ListMembersTable, listName);
+            var q = $"INSERT OR IGNORE INTO {Database.ListsTable} (ListName) values ('{listName}')";
             return q;
         }
 
-        public static string DeleteMemberByEmail(string email) {
+        /// <summary>
+        /// Inserts member
+        /// </summary>
+        /// <param name="listName"></param>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static string InsertMember(string listName, string email)
+        {
+            if (listName == null || email == null) throw new ArgumentNullException();
+            var q = $"INSERT OR IGNORE INTO {Database.ListMembersTable} (ListName, Email) VALUES ('{listName}', '{email}')";
+            return q;
+        }
+
+        /// <summary>
+        /// Deletes contact by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static string DeleteContact(string email)
+        {
             if (email == null) throw new ArgumentNullException();
-            string q = String.Format("DELETE FROM {0} WHERE Email = '{1}'", Database.ListMembersTable, email);
+            var q = $"DELETE FROM {Database.ContactsTable} WHERE Email = '{email}'";
             return q;
         }
 
-        public static string UpdateListRecord(string newListName, string oldListName) {
+        /// <summary>
+        /// Deletes list by name
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public static string DeleteList(string name)
+        {
+            if (name == null) throw new ArgumentNullException();
+            var q = $"DELETE FROM {Database.ListsTable} WHERE ListName = '{name}'";
+            return q;
+        }
+
+        /// <summary>
+        /// Deletes member by list
+        /// </summary>
+        /// <param name="listName"></param>
+        /// <returns></returns>
+        public static string DeleteMemberByList(string listName)
+        {
+            if (listName == null) throw new ArgumentNullException();
+            var q = $"DELETE FROM {Database.ListMembersTable} WHERE ListName = '{listName}'";
+            return q;
+        }
+
+        /// <summary>
+        /// Deletes member by email
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
+        public static string DeleteMemberByEmail(string email)
+        {
+            if (email == null) throw new ArgumentNullException();
+            var q = $"DELETE FROM {Database.ListMembersTable} WHERE Email = '{email}'";
+            return q;
+        }
+
+        /// <summary>
+        /// Updates list
+        /// </summary>
+        /// <param name="newListName"></param>
+        /// <param name="oldListName"></param>
+        /// <returns></returns>
+        public static string UpdateListRecord(string newListName, string oldListName)
+        {
             if (newListName == null || oldListName == null) throw new ArgumentNullException();
-            string q = String.Format("UPDATE {0} SET ListName = '{1}' WHERE ListName = '{2}'", Database.ListsTable, newListName, oldListName);
+            var q = $"UPDATE {Database.ListsTable} SET ListName = '{newListName}' WHERE ListName = '{oldListName}'";
             return q;
         }
 
-        public static string UpdateContactRecord(string oldEmail, string fName, string lName, string email, bool recieved) {
+        /// <summary>
+        /// Updates contact
+        /// </summary>
+        /// <param name="oldEmail"></param>
+        /// <param name="fName"></param>
+        /// <param name="lName"></param>
+        /// <param name="email"></param>
+        /// <param name="recieved"></param>
+        /// <returns></returns>
+        public static string UpdateContactRecord(string oldEmail, string fName, string lName, string email, bool recieved)
+        {
             if (fName == null || lName == null || email == null) throw new ArgumentNullException();
-            string q = String.Format("UPDATE {0} SET FirstName = '{1}', LastName = '{2}', Email = '{3}', RecievedMail = '{4}'  WHERE Email = '{5}'", Database.ContactsTable, fName, lName, email, recieved, oldEmail);
+            var q =
+                $"UPDATE {Database.ContactsTable} SET FirstName = '{fName}', LastName = '{lName}', Email = '{email}', RecievedMail = '{recieved}'  WHERE Email = '{oldEmail}'";
             return q;
         }
 
-        public static string UpdateMemberRecordByEmail(string oldEmail, string newEmail) {
+        /// <summary>
+        /// Updates member by email
+        /// </summary>
+        /// <param name="oldEmail"></param>
+        /// <param name="newEmail"></param>
+        /// <returns></returns>
+        public static string UpdateMemberRecordByEmail(string oldEmail, string newEmail)
+        {
             if (oldEmail == null || newEmail == null) throw new ArgumentNullException();
-            string q = String.Format("UPDATE {0} SET Email = '{1}' WHERE Email = '{2}'",Database.ListMembersTable, newEmail, oldEmail);
+            var q = $"UPDATE {Database.ListMembersTable} SET Email = '{newEmail}' WHERE Email = '{oldEmail}'";
             return q;
         }
 
-        public static string UpdateMemberRecordByList(string oldList, string newList) {
+        /// <summary>
+        /// Uodates member by list
+        /// </summary>
+        /// <param name="oldList"></param>
+        /// <param name="newList"></param>
+        /// <returns></returns>
+        public static string UpdateMemberRecordByList(string oldList, string newList)
+        {
             if (oldList == null || newList == null) throw new ArgumentNullException();
-            string q = String.Format("UPDATE {0} SET ListName = '{1}' WHERE ListName = '{2}'", Database.ListMembersTable, oldList, newList);
+            var q = $"UPDATE {Database.ListMembersTable} SET ListName = '{oldList}' WHERE ListName = '{newList}'";
             return q;
         }
 
-        public static string SelectAll(string table) {
+        /// <summary>
+        /// Gets all data from table
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static string SelectAll(string table)
+        {
             if (table == null) throw new ArgumentNullException();
-            return String.Format("SELECT * FROM {0}", table);
+            return $"SELECT * FROM {table}";
         }
 
-        public static string SelectContactsByLastName(string searchString) {
+        /// <summary>
+        /// Searches contact by name
+        /// </summary>
+        /// <param name="searchString"></param>
+        /// <returns></returns>
+        public static string SelectContactsByLastName(string searchString)
+        {
             if (searchString == null) throw new ArgumentNullException();
-            return String.Format("SELECT * FROM {0} WHERE LastName LIKE '%{1}%'", Database.ContactsTable, searchString);
+            return $"SELECT * FROM {Database.ContactsTable} WHERE LastName LIKE '%{searchString}%'";
         }
     }
 }

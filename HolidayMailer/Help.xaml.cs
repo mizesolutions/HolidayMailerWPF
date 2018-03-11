@@ -5,14 +5,13 @@ using System.Windows.Interop;
 
 namespace HolidayMailer
 {
-
     /// <summary>
     /// Interaction logic for Help.xaml
     /// </summary>
-    public partial class Help : Window
+    public partial class Help
     {
-        private const int GWL_STYLE = -16;
-        private const int WS_SYSMENU = 0x80000;
+        public int GwlStyle { get; } = -16;
+        public int WsSysmenu { get; } = 0x80000;
 
         [DllImport("user32.dll", SetLastError = true)]
         private static extern int GetWindowLong(IntPtr hWnd, int nIndex);
@@ -22,10 +21,13 @@ namespace HolidayMailer
 
         private static Help _instance;
 
+        /// <summary>
+        /// Returns a single instance of Help if it doesn't exist.
+        /// </summary>
+        /// <returns></returns>
         public static Help GetInstance()
         {
-            if (_instance == null) _instance = new Help();
-            return _instance;
+            return _instance ?? (_instance = new Help());
         }
 
 
@@ -35,6 +37,9 @@ namespace HolidayMailer
             LoadText();
         }
 
+        /// <summary>
+        /// Loads all help text.
+        /// </summary>
         private void LoadText()
         {
             NewContact_text();
@@ -47,12 +52,20 @@ namespace HolidayMailer
             RemoveMailList_text();
         }
 
+        /// <summary>
+        /// Allows window to remain open while using the functions of the main window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             var hwnd = new WindowInteropHelper(this).Handle;
-            SetWindowLong(hwnd, GWL_STYLE, GetWindowLong(hwnd, GWL_STYLE) & ~WS_SYSMENU);
+            SetWindowLong(hwnd, GwlStyle, GetWindowLong(hwnd, GwlStyle) & ~WsSysmenu);
         }
 
+        /// <summary>
+        /// How to add a new contact
+        /// </summary>
         private void NewContact_text()
         {
             newContact_text.Text = "To Add a new Contact: \n" +
@@ -65,6 +78,9 @@ namespace HolidayMailer
                                    "to save your new contact and return to the main window.";
         }
 
+        /// <summary>
+        /// How to edit contacs
+        /// </summary>
         private void EditContact_text()
         {
             editContact_text.Text = "To Edit Contacts: \n" +
@@ -77,6 +93,9 @@ namespace HolidayMailer
                                    "to save your changes and return to the main window.";
         }
 
+        /// <summary>
+        /// How to remove contacts
+        /// </summary>
         private void RemoveContact_text()
         {
             removeContact_text.Text = "To Remove Contacts: \n" +
@@ -89,6 +108,9 @@ namespace HolidayMailer
                                    "to save your new contact and return to the main window.";
         }
 
+        /// <summary>
+        /// How to search the contacts
+        /// </summary>
         private void SearchContact_text()
         {
             searchContact_text.Text = "To Search By Last Name: \n" +
@@ -96,6 +118,9 @@ namespace HolidayMailer
                                     "the contacts area and click the Search button\n";
         }
 
+        /// <summary>
+        /// How to send mail
+        /// </summary>
         private void SendMail_text()
         {
             sendMail_text.Text = "To Send Mail: \n" +
@@ -109,6 +134,9 @@ namespace HolidayMailer
                                    "information need in order to send an email.\n";
         }
 
+        /// <summary>
+        /// How to create a new mailing list
+        /// </summary>
         private void NewMailList_text()
         {
             newMailList_text.Text = "To Create a New Mailing List: \n" +
@@ -121,6 +149,9 @@ namespace HolidayMailer
                                    "to save your changes and return to the main window.";
         }
 
+        /// <summary>
+        /// How to edit a mailing list
+        /// </summary>
         private void EditMailList_text()
         {
             editMailList_text.Text = "To Edit a Mailing List: \n" +
@@ -133,6 +164,9 @@ namespace HolidayMailer
                                      "to save your changes and return to the main window.";
         }
 
+        /// <summary>
+        /// How to remove a mailing lsit
+        /// </summary>
         private void RemoveMailList_text()
         {
             removeMailList_text.Text = "To Remove Mailing List: \n" +
@@ -145,8 +179,12 @@ namespace HolidayMailer
                                        "to save your changes and return to the main window.";
         }
 
-
-        private void Btn_Close_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Sets the instance to null and closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCloseClick(object sender, RoutedEventArgs e)
         {
             _instance = null;
             Close();

@@ -4,16 +4,20 @@ using System.Reflection;
 
 namespace HolidayMailer
 {
+    /// <summary>
+    /// This class is used to gather current version information that is displayed in the About window.
+    /// Code is a modified version of code found on the Code Project website.
+    /// @URL: https://www.codeproject.com/Tips/353819/Get-all-Assembly-Information
+    /// </summary>
     class AssemblyInfo
     {
+        public Assembly Assembly { get; set; }
+
         public AssemblyInfo(Assembly assembly)
         {
-            if (assembly == null)
-                throw new ArgumentNullException("assembly");
-            this.assembly = assembly;
+            Assembly = assembly ?? throw new ArgumentNullException(nameof(assembly));
         }
 
-        private readonly Assembly assembly;
 
         /// <summary>
         /// Gets the title property
@@ -23,7 +27,7 @@ namespace HolidayMailer
             get
             {
                 return GetAttributeValue<AssemblyTitleAttribute>(a => a.Title,
-                       Path.GetFileNameWithoutExtension(assembly.CodeBase));
+                       Path.GetFileNameWithoutExtension(Assembly.CodeBase));
             }
         }
 
@@ -34,12 +38,8 @@ namespace HolidayMailer
         {
             get
             {
-                string result = string.Empty;
-                Version version = assembly.GetName().Version;
-                if (version != null)
-                    return version.ToString();
-                else
-                    return "1.0.0.0";
+                var version = Assembly.GetName().Version;
+                return version != null ? version.ToString() : "1.0.0.0";
             }
         }
 
@@ -50,7 +50,6 @@ namespace HolidayMailer
         {
             get { return GetAttributeValue<AssemblyDescriptionAttribute>(a => a.Description); }
         }
-
 
         /// <summary>
         ///  Gets the product's full name.
@@ -76,14 +75,12 @@ namespace HolidayMailer
             get { return GetAttributeValue<AssemblyCompanyAttribute>(a => a.Company); }
         }
 
-        protected string GetAttributeValue<TAttr>(Func<TAttr,
+
+        internal string GetAttributeValue<TAttr>(Func<TAttr,
           string> resolveFunc, string defaultResult = null) where TAttr : Attribute
         {
-            object[] attributes = assembly.GetCustomAttributes(typeof(TAttr), false);
-            if (attributes.Length > 0)
-                return resolveFunc((TAttr)attributes[0]);
-            else
-                return defaultResult;
+            var attributes = Assembly.GetCustomAttributes(typeof(TAttr), false);
+            return attributes.Length > 0 ? resolveFunc((TAttr)attributes[0]) : defaultResult;
         }
     }
 }

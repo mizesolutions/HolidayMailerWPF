@@ -3,25 +3,17 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Title="Remove Contact" Height="286" Width="476.434" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Margin="3,0,3,3" Background="White">
-            <!--<Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B8D9C" Offset="1"/>
-                <GradientStop Color="#FF8BBECF"/>
-                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
-            </LinearGradientBrush>
-        </Grid.Background>-->
             <DataGrid x:Name="dataGrid_contacts" Margin="10,0,10,64" SelectionMode="Single" Height="166" VerticalAlignment="Bottom"/>
-            <Button x:Name="button_remove" Content="Remove" HorizontalAlignment="Left" Margin="85,0,0,17" VerticalAlignment="Bottom" Width="75" Click="Button_remove_Click">
+            <Button x:Name="button_remove" Content="Remove" HorizontalAlignment="Left" Margin="85,0,0,17" VerticalAlignment="Bottom" Width="75" Click="BtnRemoveClick">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="button_exit" Content="Close" HorizontalAlignment="Right" Margin="0,0,85,17" Width="75" Click="Button_exit_Click" Height="20" VerticalAlignment="Bottom">
+            <Button x:Name="button_exit" Content="Close" HorizontalAlignment="Right" Margin="0,0,85,17" Width="75" Click="BtnCloseClick" Height="20" VerticalAlignment="Bottom">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>

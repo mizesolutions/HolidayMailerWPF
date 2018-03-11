@@ -4,40 +4,31 @@
              StartupUri="MainWindow.xaml">
     <Application.Resources>
         <!--Control colors.-->
-            <Color x:Key="ControlNormalColor">#FFB0C4DE</Color>
-            <Color x:Key="ControlMouseOverColor">#FF99A7FD</Color>
-            <Color x:Key="DisabledControlColor">#FFF2F2F2</Color>
-            <Color x:Key="DisabledForegroundColor">#FFBFBFBF</Color>
-            <Color x:Key="ControlPressedColor">#FF4163BD</Color>
-
-        <!--<Color x:Key="ControlNormalColor">#FFC0C0CE</Color>
-        <Color x:Key="ControlMouseOverColor">#FFAFA3B9</Color>
+        <Color x:Key="ControlNormalColor">#FFB0C4DE</Color>
+        <Color x:Key="ControlMouseOverColor">#FF99A7FD</Color>
         <Color x:Key="DisabledControlColor">#FFF2F2F2</Color>
         <Color x:Key="DisabledForegroundColor">#FFBFBFBF</Color>
-        <Color x:Key="ControlPressedColor">#FF211AA9</Color>-->
-
+        <Color x:Key="ControlPressedColor">#FF4163BD</Color>
         <!-- FocusVisual -->
-
-            <Style x:Key="ButtonFocusVisual">
-                <Setter Property="Control.Template">
-                    <Setter.Value>
-                        <ControlTemplate>
+        <Style x:Key="ButtonFocusVisual">
+            <Setter Property="Control.Template">
+                <Setter.Value>
+                    <ControlTemplate>
                         <Border>
                             <Rectangle Margin="2" StrokeThickness="1" Stroke="#60000000" StrokeDashArray="1 2" />
                         </Border>
                     </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-            <!-- Button -->
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <!-- Button -->
         <Style TargetType="Button">
             <Setter Property="SnapsToDevicePixels" Value="true" />
             <Setter Property="OverridesDefaultStyle" Value="true" />
             <Setter Property="FocusVisualStyle" Value="{StaticResource ButtonFocusVisual}" />
             <Setter Property="MinHeight" Value="23px" />
             <Setter Property="MinWidth"  Value="103px" />
-            <Setter Property="FontWeight"  Value="Bold" />
+            <Setter Property="FontWeight"  Value="Medium" />
             <Setter Property="Foreground" Value="Black" />
             <Setter Property="Template">
                 <Setter.Value>
@@ -92,6 +83,5 @@
                 </Setter.Value>
             </Setter>
         </Style>
-
     </Application.Resources>
 </Application>

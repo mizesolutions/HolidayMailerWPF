@@ -97,7 +97,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="AssemblyInfo.cs" />
-    <Compile Include="Cred.cs" />
+    <Compile Include="Credential.cs" />
     <Compile Include="CredWindow.xaml.cs">
       <DependentUpon>CredWindow.xaml</DependentUpon>
     </Compile>
@@ -231,7 +231,7 @@
   </Target>
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2000/1/1" BuildVersion_AssemblyInfoFilename="HolidayMailer\Properties\AssemblyInfo.cs" BuildVersion_UseGlobalSettings="True" />
+      <UserProperties BuildVersion_UseGlobalSettings="True" BuildVersion_AssemblyInfoFilename="HolidayMailer\Properties\AssemblyInfo.cs" BuildVersion_StartDate="2000/1/1" />
     </VisualStudio>
   </ProjectExtensions>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

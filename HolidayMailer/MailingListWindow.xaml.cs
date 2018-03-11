@@ -4,117 +4,167 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 
-namespace HolidayMailer {
+namespace HolidayMailer
+{
+    /// <summary>
+    /// Allows user to manage mailing lists.
+    /// </summary>
+    public partial class MailingListWindow
+    {
+        public Database Database { get; set; }
+        public List<string> Emails { get; set; }
 
-    public partial class MailingListWindow : Window {
 
-        private Database db;
-        private List<string> emails;
-
-        public MailingListWindow(Database db, string listName=null) {
+        public MailingListWindow(Database database, string listName = null)
+        {
             InitializeComponent();
             CenterWindowOnScreen();
-            this.db = db;
-            db.LoadDataGrid(dataGrid_results, Queries.SelectAll(Database.ContactsTable));
-            emails = new List<string>();
-            if(listName != null) {
+            Database = database;
+            Database.LoadDataGrid(dataGrid_results, Queries.SelectAll(Database.ContactsTable));
+            Emails = new List<string>();
+            if (listName != null)
+            {
                 LoadListData(listName);
             }
         }
 
+        /// <summary>
+        /// Centers the window.
+        /// </summary>
         private void CenterWindowOnScreen()
         {
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-            double windowWidth = this.Width;
-            double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
+            Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
         }
 
-        private void Button_add_Click(object sender, RoutedEventArgs e) {
-            if(dataGrid_results.SelectedCells.Count > 0) {
-                DataRowView dataRow = (DataRowView) dataGrid_results.SelectedItem;
-                int index = dataGrid_results.SelectedIndex;
-                string cellValue = dataRow.Row.ItemArray[2].ToString();
+        /// <summary>
+        /// Adds selction to the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnAddClick(object sender, RoutedEventArgs e)
+        {
+            if (dataGrid_results.SelectedCells.Count > 0)
+            {
+                var dataRow = (DataRowView)dataGrid_results.SelectedItem;
+                var cellValue = dataRow.Row.ItemArray[2].ToString();
                 listBox_members.Items.Add(cellValue);
             }
         }
 
-        private void Button_remove_Click(object sender, RoutedEventArgs e) {
-            if(listBox_members.SelectedItem != null) {
+        /// <summary>
+        /// Removes selection from the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRemoveClick(object sender, RoutedEventArgs e)
+        {
+            if (listBox_members.SelectedItem != null)
+            {
                 listBox_members.Items.Remove(listBox_members.SelectedItem);
             }
-            else {
+            else
+            {
                 listBox_members.Items.Clear();
             }
         }
 
-        private void Button_cancel_Click(object sender, RoutedEventArgs e) {
+        /// <summary>
+        /// Closed the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCloseClick(object sender, RoutedEventArgs e)
+        {
             Close();
         }
 
-        private void Button_save_Click(object sender, RoutedEventArgs e) {
-
-            List<string> newEmails = CollectData();
-            if (IsValid()) {
-                string name = textBox_name.Text;
-                db.InsertRecord(Queries.InsertList(name));
-                foreach (Member m in db.MemberQuery()) {
-                    if (!newEmails.Contains(m.Email)) {
-                        db.ExecuteDbQuery(Queries.DeleteMemberByList(name));
+        /// <summary>
+        /// Saves the created list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSaveClick(object sender, RoutedEventArgs e)
+        {
+            var newEmails = CollectData();
+            if (IsValid())
+            {
+                var name = textBox_name.Text;
+                Database.InsertRecord(Queries.InsertList(name));
+                foreach (var m in Database.MemberQuery())
+                {
+                    if (!newEmails.Contains(m.Email))
+                    {
+                        Database.ExecuteDatabaseQuery(Queries.DeleteMemberByList(name));
                     }
                 }
-
-                foreach (string email in newEmails) {
-                    db.InsertRecord(Queries.InsertMember(name, email));
+                foreach (var email in newEmails)
+                {
+                    Database.InsertRecord(Queries.InsertMember(name, email));
                 }
                 Close();
             }
         }
 
-        private List<string> CollectData() {
-            List<string> emails = new List<string>();
-            int len = listBox_members.Items.Count;
-            for (int i = 0; i < len; i++) {
+        /// <summary>
+        /// Builds email list to update the view
+        /// </summary>
+        /// <returns></returns>
+        private List<string> CollectData()
+        {
+            var emails = new List<string>();
+            var len = listBox_members.Items.Count;
+            for (var i = 0; i < len; i++)
+            {
                 emails.Add(listBox_members.Items[i].ToString());
             }
             return emails;
         }
 
-        private bool IsValid() {
-            bool valid = true;
-            if (textBox_name.Text == null || textBox_name.Text == "") {
+        /// <summary>
+        /// Checks for valid input
+        /// </summary>
+        /// <returns></returns>
+        private bool IsValid()
+        {
+            var valid = true;
+            if (string.IsNullOrEmpty(textBox_name.Text))
+            {
                 valid = false;
                 textBox_name.Background = Brushes.MistyRose;
             }
-            if (listBox_members.Items.Count <= 0) {
+            if (listBox_members.Items.Count <= 0)
+            {
                 valid = false;
                 MessageBox.Show(Application.Current.MainWindow, "Please add at least one contact.", "Contact Selection");
-                this.Focus();
+                Focus();
             }
-
             return valid;
         }
 
-        private void LoadListData(string listName) {
-            List<MailingList> listNames = db.ListQuery();
+        /// <summary>
+        /// Updates list view
+        /// </summary>
+        /// <param name="listName"></param>
+        private void LoadListData(string listName)
+        {
+            var listNames = Database.ListQuery();
             var listsQuery = from mailer in listNames
-                                  where  mailer.Name == listName
-                                  select mailer;
-            foreach(MailingList name in listsQuery) {
+                             where mailer.Name == listName
+                             select mailer;
+            foreach (var name in listsQuery)
+            {
                 textBox_name.Text = name.Name;
             }
-
-            List<Member> members = db.MemberQuery();
+            var members = Database.MemberQuery();
             var membersQuery = from member in members
                                where member.ListName == listName
                                select member;
-            foreach(Member m in membersQuery) {
+            foreach (var m in membersQuery)
+            {
                 listBox_members.Items.Add(m.Email);
-                emails.Add(m.Email);
+                Emails.Add(m.Email);
             }
-
         }
     }
 }

@@ -3,49 +3,41 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Loaded="Window_Loaded"
         Title="Help" Height="936" Width="463" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Margin="3,0,3,3" Background="White">
-            <!--<Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B8D9C" Offset="1"/>
-                <GradientStop Color="#FF8BBECF"/>
-                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
-            </LinearGradientBrush>
-        </Grid.Background>-->
             <TabControl Margin="10,0,10,60" BorderBrush="#FF444444" Background="#FF78878D" Height="814" VerticalAlignment="Bottom">
                 <TabControl.Resources>
-                        <Style TargetType="TabItem">
-                            <Setter Property="Template">
-                                <Setter.Value>
-                                    <ControlTemplate TargetType="TabItem">
-                                        <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="3,8,0,0" Margin="1,0">
-                                            <ContentPresenter x:Name="ContentSite"
+                    <Style TargetType="TabItem">
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="TabItem">
+                                    <Border Name="Border" BorderThickness="1,1,1,0" BorderBrush="Gainsboro" CornerRadius="3,8,0,0" Margin="1,0">
+                                        <ContentPresenter x:Name="ContentSite"
                                                               VerticalAlignment="Center"
                                                               HorizontalAlignment="Center"
                                                               ContentSource="Header"
                                                               Margin="10,2"/>
-                                        </Border>
-                                        <ControlTemplate.Triggers>
-                                            <Trigger Property="IsSelected" Value="True">
-                                                <Setter TargetName="Border" Property="Background" Value="White" />
-                                            </Trigger>
-                                            <Trigger Property="IsSelected" Value="False">
-                                                <Setter TargetName="Border" Property="Background" Value="LightGray" />
-                                            </Trigger>
-                                        </ControlTemplate.Triggers>
-                                    </ControlTemplate>
-                                </Setter.Value>
-                            </Setter>
-                        </Style>
-                    </TabControl.Resources>
-                    <TabControl.Effect>
-                        <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
-                    </TabControl.Effect>
-                    <TabItem x:Name="tab_Contacts" Header="Contacts" BorderBrush="#FFE5E5E5" FontWeight="Bold" FontSize="14">
+                                    </Border>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True">
+                                            <Setter TargetName="Border" Property="Background" Value="White" />
+                                        </Trigger>
+                                        <Trigger Property="IsSelected" Value="False">
+                                            <Setter TargetName="Border" Property="Background" Value="LightGray" />
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </TabControl.Resources>
+                <TabControl.Effect>
+                    <DropShadowEffect BlurRadius="2" Opacity="0.75" ShadowDepth="2"/>
+                </TabControl.Effect>
+                <TabItem x:Name="tab_Contacts" Header="Contacts" BorderBrush="#FFE5E5E5" FontWeight="Bold" FontSize="14">
                     <Grid Background="#FFE5E5E5" Margin="-5,-5,-5,-3">
                         <GroupBox x:Name="newContact_group" Header="Add New Contact" Height="190" Margin="10,10,10,0" VerticalAlignment="Top" Background="White" FontWeight="Bold" BorderBrush="#FFA0A4A6">
                             <TextBlock x:Name="newContact_text" Margin="10,10,2,2" TextWrapping="Wrap" FontWeight="Normal"/>
@@ -79,7 +71,7 @@
                 </TabItem>
             </TabControl>
             <Grid Background="#FF737981" Margin="0,0,0,0" Height="61" VerticalAlignment="Bottom">
-                <Button x:Name="btn_Close" Content="Close" Margin="136,0,136,20" Click="Btn_Close_Click" Height="23" VerticalAlignment="Bottom">
+                <Button x:Name="btn_Close" Content="Close" Margin="136,0,136,20" Click="BtnCloseClick" Height="23" VerticalAlignment="Bottom">
                     <Button.Effect>
                         <DropShadowEffect BlurRadius="2" Color="#FF212020" Opacity="0.65" ShadowDepth="1"/>
                     </Button.Effect>

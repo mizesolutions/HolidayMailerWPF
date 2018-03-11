@@ -1,50 +1,62 @@
 ﻿using System.Windows;
 using System;
 
-namespace HolidayMailer {
+namespace HolidayMailer
+{
+    /// <summary>
+    /// Allows user to remove lists
+    /// </summary>
+    public partial class RemoveListWindow
+    {
+        public Database Database { get; set; }
 
-    public partial class RemoveListWindow : Window {
-
-        private Database db;
-
-        public RemoveListWindow(Database db) {
+        public RemoveListWindow(Database database)
+        {
             InitializeComponent();
             CenterWindowOnScreen();
-            this.db = db;
-            db.LoadListBox(listBox_mailingLists, Queries.SelectAll(Database.ListsTable));
+            Database = database;
+            database.LoadListBox(listBox_mailingLists, Queries.SelectAll(Database.ListsTable));
         }
 
+        /// <summary>
+        /// Centers the window.
+        /// </summary>
         private void CenterWindowOnScreen()
         {
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-            double windowWidth = this.Width;
-            double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
+            Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
         }
 
-        private void Button_remove_Click(object sender, RoutedEventArgs e) {
-
+        /// <summary>
+        /// Removes the mailing list from the list table and the removes attached members
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRemoveClick(object sender, RoutedEventArgs e)
+        {
             try
             {
                 if (listBox_mailingLists.Items.Count <= 0) return;
-                string listName = listBox_mailingLists.SelectedItem.ToString();
-                db.ExecuteDbQuery(Queries.DeleteList(listName));
-                db.ExecuteDbQuery(Queries.DeleteMemberByList(listName));
+                var listName = listBox_mailingLists.SelectedItem.ToString();
+                Database.ExecuteDatabaseQuery(Queries.DeleteList(listName));
+                Database.ExecuteDatabaseQuery(Queries.DeleteMemberByList(listName));
                 listBox_mailingLists.Items.Clear();
-                db.LoadListBox(listBox_mailingLists, Queries.SelectAll(Database.ListsTable));
+                Database.LoadListBox(listBox_mailingLists, Queries.SelectAll(Database.ListsTable));
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show(Application.Current.MainWindow, "Please select a list to remove or click close to return to the main window.", "Rmove List");
                 this.Focus();
             }
-
-
         }
 
-        private void Button_cancel_Click(object sender, RoutedEventArgs e) {
+        /// <summary>
+        /// Closes the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnCloseClick(object sender, RoutedEventArgs e)
+        {
             Close();
         }
     }

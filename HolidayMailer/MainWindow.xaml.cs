@@ -1,79 +1,95 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Reflection;
 using System.Windows;
 
-namespace HolidayMailer {
+namespace HolidayMailer
+{
+    /// <summary>
+    /// Main window for the application handles calling and opeing differnet windows
+    /// to allow the user to add, edit, and remove users and mailing lists, as well 
+    /// as send emails to contacts and list.
+    /// </summary>
+    public partial class MainWindow
+    {
+        #region Properties
 
-    public partial class MainWindow : Window {
-        private Database db;
-        private delegate void LaunchWindow(Window window);
-        private LaunchWindow launchContact;
-        private LaunchWindow launchNewList;
-        private LaunchWindow launchSendMail;
-        private LaunchWindow launchRemoveList;
-        private LaunchWindow launchRemoveContact;
-        private LaunchWindow launchEditContactsWindow;
-        private LaunchWindow launchHelpWindow;
-        private static LaunchWindow launchCredWindow;
-        private AssemblyInfo entryAssemblyInfo;
+        public Database Database { get; set; }
+        internal delegate void LaunchWindow(Window window);
+        internal LaunchWindow LaunchContact { get; set; }
+        internal LaunchWindow LaunchNewList { get; set; }
+        internal LaunchWindow LaunchSendMail { get; set; }
+        internal LaunchWindow LaunchRemoveList { get; set; }
+        internal LaunchWindow LaunchRemoveContact { get; set; }
+        internal LaunchWindow LaunchEditContactsWindow { get; set; }
+        internal LaunchWindow LaunchHelpWindow { get; set; }
+        internal static LaunchWindow LaunchCredentialWindow { get; set; }
+        internal AssemblyInfo EntryAssemblyInfo { get; set; }
 
+        #endregion Properties
 
-        #region Main Window
+        #region MainWindow
 
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
-            this.Closed += new EventHandler(MainWindow_Closed);
+            Closed += MainWindowClosed;
             CenterWindowOnScreen();
-            entryAssemblyInfo = new AssemblyInfo(Assembly.GetEntryAssembly());
+            EntryAssemblyInfo = new AssemblyInfo(Assembly.GetEntryAssembly());
             menuIt_logout.IsEnabled = false;
 
-            db = new Database();
+            Database = new Database();
             UpdateDataGrid();
 
-            launchCredWindow = (window) => {
+            LaunchCredentialWindow = (window) =>
+            {
                 window.ShowDialog();
             };
 
-            launchContact = (window) => {
+            LaunchContact = (window) =>
+            {
                 window.ShowDialog();
                 UpdateDefaultLists();
                 UpdateDataGrid();
             };
 
-            launchNewList = (window) => {
+            LaunchNewList = (window) =>
+            {
                 window.ShowDialog();
                 UpdateListBox();
             };
 
-            launchSendMail = (window) => {
+            LaunchSendMail = (window) =>
+            {
                 window.ShowDialog();
             };
 
-            launchRemoveList = (window) => {
+            LaunchRemoveList = (window) =>
+            {
                 window.ShowDialog();
                 UpdateListBox();
             };
 
-            launchRemoveContact = (window) => {
+            LaunchRemoveContact = (window) =>
+            {
                 window.ShowDialog();
                 UpdateDataGrid();
             };
 
-            launchEditContactsWindow = (window) => {
+            LaunchEditContactsWindow = (window) =>
+            {
                 window.ShowDialog();
                 UpdateDataGrid();
             };
 
-            launchHelpWindow = (window) => {
-
-                Help form = Help.GetInstance();
+            LaunchHelpWindow = (window) =>
+            {
+                var form = Help.GetInstance();
                 if (form.Visibility != Visibility.Visible)
                 {
                     form.Top = 0;
-                    form.Left = (Left + Width)-5;
+                    form.Left = (Left + Width) - 5;
                     form.Show();
                 }
                 else
@@ -86,87 +102,123 @@ namespace HolidayMailer {
             UpdateListBox();
         }
 
+        /// <summary>
+        /// Centers the window.
+        /// </summary>
         private void CenterWindowOnScreen()
         {
-            double screenWidth = SystemParameters.PrimaryScreenWidth;
-            double screenHeight = SystemParameters.PrimaryScreenHeight;
-            double windowWidth = this.Width;
-            double windowHeight = this.Height;
-            this.Left = (screenWidth / 2) - (windowWidth / 2);
-            this.Top = (screenHeight / 2) - (windowHeight / 2);
+            Left = (SystemParameters.PrimaryScreenWidth - Width) / 2;
+            Top = (SystemParameters.PrimaryScreenHeight - Height) / 2;
         }
 
-#endregion
+        #endregion MainWindow
 
         #region Updaters
-
+        /// <summary>
+        /// Updates the mailing list display
+        /// </summary>
         private void UpdateListBox()
         {
             listBox_mailing_list.Items.Clear();
-            db.LoadListBox(listBox_mailing_list, Queries.SelectAll(Database.ListsTable));
+            Database.LoadListBox(listBox_mailing_list, Queries.SelectAll(Database.ListsTable));
         }
 
+        /// <summary>
+        /// Updated the contacts list
+        /// </summary>
         private void UpdateDataGrid()
         {
-            db.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
+            Database.LoadDataGrid(dataGrid_contacts, Queries.SelectAll(Database.ContactsTable));
         }
 
+        /// <summary>
+        /// Updates the default lists
+        /// </summary>
         private void UpdateDefaultLists()
         {
-            string allContacts = "All Contacts";
-            string sentMeMail = "Contacts who have sent me mail previously.";
-            db.InsertRecord(Queries.InsertList(allContacts));
-            db.InsertRecord(Queries.InsertList(sentMeMail));
-            List<Person> contacts = db.PersonQuery();
-            foreach (Person c in contacts)
+            var allContacts = "All Contacts";
+            var sentMeMail = "Contacts who have sent me mail previously.";
+            Database.InsertRecord(Queries.InsertList(allContacts));
+            Database.InsertRecord(Queries.InsertList(sentMeMail));
+            var contacts = Database.PersonQuery();
+            foreach (var c in contacts)
             {
-                db.InsertRecord(Queries.InsertMember(allContacts, c.Email));
+                Database.InsertRecord(Queries.InsertMember(allContacts, c.Email));
                 if (c.Recieved)
                 {
-                    db.InsertRecord(Queries.InsertMember(sentMeMail, c.Email));
+                    Database.InsertRecord(Queries.InsertMember(sentMeMail, c.Email));
                 }
             }
         }
 
-#endregion
+        #endregion Updaters
 
         #region Click Functions
-
-        private void Button_new_contact_Click(object sender, RoutedEventArgs e) {
-            launchContact.Invoke(new MemberResult(db));
+        /// <summary>
+        /// Opens add contact window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnNewContactClick(object sender, RoutedEventArgs e)
+        {
+            LaunchContact.Invoke(new MemberResult(Database));
         }
 
-        private void MenuIt_new_list_Click(object sender, RoutedEventArgs e) {
-            launchNewList.Invoke(new MailingListWindow(db));
+        /// <summary>
+        /// Opens add list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemNewListClick(object sender, RoutedEventArgs e)
+        {
+            LaunchNewList.Invoke(new MailingListWindow(Database));
         }
 
-        private void MenuIt_edit_list_Click(object sender, RoutedEventArgs e) {
-            if (listBox_mailing_list.SelectedValue != null) {
+        /// <summary>
+        /// Opens edit list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemEditListClick(object sender, RoutedEventArgs e)
+        {
+            if (listBox_mailing_list.SelectedValue != null)
+            {
                 tab_Contacts.IsSelected = false;
                 tab_MailingLists.IsSelected = true;
-                string name = listBox_mailing_list.SelectedValue.ToString();
-                launchNewList.Invoke(new MailingListWindow(db, name));
+                var name = listBox_mailing_list.SelectedValue.ToString();
+                LaunchNewList.Invoke(new MailingListWindow(Database, name));
             }
-            else {
+            else
+            {
                 MessageBox.Show(Application.Current.MainWindow, "Please select a list to edit and try again.", "List Selection");
             }
         }
 
-        private void MenuIt_send_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Calls BtnSendToClick function to open the Send To window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemSendClick(object sender, RoutedEventArgs e)
         {
-            Button_send_to_Click(sender, e);
+            BtnSendToClick(sender, e);
         }
 
-        private void Button_send_to_Click(object sender, RoutedEventArgs e) {
-
-            if (Cred.CredReady())
+        /// <summary>
+        /// Opens the Send To window if the user has validated their credentials, else they are prompted to validate
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSendToClick(object sender, RoutedEventArgs e)
+        {
+            if (Credential.CredReady())
             {
                 if (listBox_mailing_list.SelectedItems.Count > 0)
                 {
-                    string listName = listBox_mailing_list.SelectedItem.ToString();
-                    List<Member> members = db.MemberQuery();
-                    List<string> recipients = (from member in members where member.ListName == listName select member.Email).ToList();
-                    launchSendMail.Invoke(new SendWindow(recipients));
+                    var listName = listBox_mailing_list.SelectedItem.ToString();
+                    var members = Database.MemberQuery();
+                    var recipients = (from member in members where member.ListName == listName select member.Email).ToList();
+                    LaunchSendMail.Invoke(new SendWindow(recipients));
                 }
                 else
                 {
@@ -177,7 +229,7 @@ namespace HolidayMailer {
             {
                 MessageBox.Show(Application.Current.MainWindow, "Please login before sending mail.", "Not Signed In");
                 LaunchCredWindow();
-                if (Cred.CredReady())
+                if (Credential.CredReady())
                 {
                     menuIt_login.IsEnabled = false;
                     menuIt_logout.IsEnabled = true;
@@ -186,106 +238,194 @@ namespace HolidayMailer {
 
         }
 
-        private void MenuIt_new_contact_Click(object sender, RoutedEventArgs e) {
-            launchContact.Invoke(new MemberResult(db));
+        /// <summary>
+        /// Opens the new contact window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemNewContactClick(object sender, RoutedEventArgs e)
+        {
+            LaunchContact.Invoke(new MemberResult(Database));
         }
 
-        private void MenuIt_edit_contact_Click(object sender, RoutedEventArgs e) {
-            launchEditContactsWindow.Invoke(new EditContactWindow(db));
+        /// <summary>
+        /// Opens the edit contact window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemEditContactClick(object sender, RoutedEventArgs e)
+        {
+            LaunchEditContactsWindow.Invoke(new EditContactWindow(Database));
         }
 
-        private void MenuIt_remove_list_Click(object sender, RoutedEventArgs e) {
-            launchRemoveList(new RemoveListWindow(db));
+        /// <summary>
+        /// Opens remove list window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenutItemRemoveListClick(object sender, RoutedEventArgs e)
+        {
+            LaunchRemoveList(new RemoveListWindow(Database));
         }
 
-        private void Button_remove_contact_Click(object sender, RoutedEventArgs e) {
-            launchRemoveContact(new RemoveContactWindow(db));
+        /// <summary>
+        /// Opens remove contact window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnRemoveContactClick(object sender, RoutedEventArgs e)
+        {
+            LaunchRemoveContact(new RemoveContactWindow(Database));
         }
 
-        private void Button_edit_contact_Click(object sender, RoutedEventArgs e) {
-            launchEditContactsWindow.Invoke(new EditContactWindow(db));
+        /// <summary>
+        /// Opens edit contact window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnEditContactClick(object sender, RoutedEventArgs e)
+        {
+            LaunchEditContactsWindow.Invoke(new EditContactWindow(Database));
         }
 
-        private void Button_filter_Click(object sender, RoutedEventArgs e) {
-            if (textBox_filter.Text != null) {
-                db.LoadDataGrid(dataGrid_contacts, Queries.SelectContactsByLastName(textBox_filter.Text));
+        /// <summary>
+        /// Allows user to search list by last name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BtnSearchFilterClick(object sender, RoutedEventArgs e)
+        {
+            if (textBox_filter?.Text != null)
+            {
+                Database.LoadDataGrid(dataGrid_contacts, Queries.SelectContactsByLastName(textBox_filter.Text));
             }
         }
 
-        private void MenuIt_exit_Click(object sender, RoutedEventArgs e) {
+        /// <summary>
+        /// Closes the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemExitClick(object sender, RoutedEventArgs e)
+        {
             Close();
         }
-        
-        private void MenuIt_login_Click(object sender, RoutedEventArgs e)
+
+        /// <summary>
+        /// Opens the credentials window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemLoginClick(object sender, RoutedEventArgs e)
         {
-            launchCredWindow.Invoke(new CredWindow());
+            LaunchCredentialWindow.Invoke(new CredWindow());
         }
 
-        private void MenuIt_help_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Opens the help window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItenHelpClick(object sender, RoutedEventArgs e)
         {
-            launchHelpWindow(new Help());
+            LaunchHelpWindow(new Help());
         }
 
+        /// <summary>
+        /// Opens the credential window
+        /// </summary>
         public static void LaunchCredWindow()
         {
-            launchCredWindow.Invoke(new CredWindow());
+            LaunchCredentialWindow.Invoke(new CredWindow());
         }
 
-        private void MenuIt_logout_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Allows user to clear their credentials
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemLogoutClick(object sender, RoutedEventArgs e)
         {
-            Cred.NetCred = new NetworkCredential();
-            Cred.User = "";
-            if (!Cred.CredReady())
+            Credential.NetworkCredential = new NetworkCredential();
+            Credential.User = "";
+            if (!Credential.CredReady())
             {
                 MessageBox.Show(Application.Current.MainWindow, "Your email credintials have been cleared. \n\n" +
                                                                 "You may continue to edit members and mailing lists. \n" +
                                                                 "In oder to send any new messages, you will be required\n" +
                                                                 "to log in again.", "Logout");
             }
-           ChangeLogInOut(true);
+            ChangeLogInOut(true);
         }
 
-        private void MenuIt_about_click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Opens the About window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemAboutClick(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Application.Current.MainWindow, entryAssemblyInfo.Company + "\n" +
-                                                            entryAssemblyInfo.Product + "\n" +
-                                                            entryAssemblyInfo.Copyright + "\n" +
-                                                            entryAssemblyInfo.Description + "\n" +
-                                                            "Version: " + entryAssemblyInfo.Version + "\n" +
+            MessageBox.Show(Application.Current.MainWindow, EntryAssemblyInfo.Company + "\n" +
+                                                            EntryAssemblyInfo.Product + "\n" +
+                                                            EntryAssemblyInfo.Copyright + "\n" +
+                                                            EntryAssemblyInfo.Description + "\n" +
+                                                            "Version: " + EntryAssemblyInfo.Version + "\n" +
                                                             "64 bit/ 32 bit prefered", "About Holiday Mailer");
         }
 
         #endregion
 
-        #region Helper Methods
+        #region Helper Functions
 
-        private void MenuIt_Mailing_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        /// <summary>
+        /// Switches to the Mail tab based on mouse location
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemMailingMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             tab_Contacts.IsSelected = false;
             tab_MailingLists.IsSelected = true;
         }
 
-        private void MenuIt_Contact_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        /// <summary>
+        /// Switches to the Contacts tab based on mouse location
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MenuItemContactMouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
             tab_Contacts.IsSelected = true;
             tab_MailingLists.IsSelected = false;
         }
 
+        /// <summary>
+        /// Enables/disables log in and log out menu items
+        /// </summary>
+        /// <param name="value"></param>
         public void ChangeLogInOut(bool value)
         {
             menuIt_login.IsEnabled = value;
             menuIt_logout.IsEnabled = !value;
         }
 
-        protected void MainWindow_Closed(object sender, EventArgs args)
+        /// <summary>
+        /// Closes all windows
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="args"></param>
+        protected void MainWindowClosed(object sender, EventArgs args)
         {
             CloseAllWindows();
         }
 
+        /// <summary>
+        /// Closes all windows
+        /// </summary>
         private void CloseAllWindows()
         {
-            for (int intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
-                App.Current.Windows[intCounter].Close();
+            for (var intCounter = App.Current.Windows.Count - 1; intCounter >= 0; intCounter--)
+                Application.Current.Windows[intCounter].Close();
         }
 
         #endregion

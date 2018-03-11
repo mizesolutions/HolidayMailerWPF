@@ -3,31 +3,23 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:HolidayMailer"
         mc:Ignorable="d"
         Title="Edit Contact" Height="436" Width="462.774" ResizeMode="NoResize">
     <Grid Background="#FFBBCBD4">
         <Grid Background="White" Margin="3,0,3,3">
-            <!--<Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF5B8D9C" Offset="1"/>
-                <GradientStop Color="#FF8BBECF"/>
-                <GradientStop Color="#FFDCF7FF" Offset="0.539"/>
-            </LinearGradientBrush>
-        </Grid.Background>-->
-            <DataGrid x:Name="dataGrid_contacts" Margin="10,0,12,176" SelectionChanged="DataGrid_contacts_SelectionChanged" BorderBrush="#FF54616E" Height="191" VerticalAlignment="Bottom"/>
+            <DataGrid x:Name="dataGrid_contacts" Margin="10,0,12,176" SelectionChanged="DataGridContactsSelectionChanged" BorderBrush="#FF54616E" Height="191" VerticalAlignment="Bottom"/>
             <Label x:Name="label_fName" Content="First Name:" HorizontalAlignment="Left" Margin="31,0,0,139" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBox x:Name="textBox_fname" Height="23" Margin="110,0,0,142" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="295"/>
             <Label x:Name="label_lName" Content="Last Name:" HorizontalAlignment="Left" Margin="32,0,0,111" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBox x:Name="textBox_lName" Height="23" Margin="110,0,0,114" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="295"/>
             <Label x:Name="label_email" Content="Email:" HorizontalAlignment="Left" Margin="61,0,0,83" VerticalAlignment="Bottom" FontWeight="Bold"/>
             <TextBox x:Name="textBox_email" Height="23" Margin="110,0,0,86" TextWrapping="Wrap" Text="" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="295"/>
-            <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="75,0,0,22" VerticalAlignment="Bottom" Width="75" Click="Button_save_Click">
+            <Button x:Name="button_save" Content="Save" HorizontalAlignment="Left" Margin="75,0,0,22" VerticalAlignment="Bottom" Width="75" Click="BtnSaveClick">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>
             </Button>
-            <Button x:Name="button_cancel" Content="Close" HorizontalAlignment="Right" Margin="0,0,80,22" VerticalAlignment="Bottom" Width="75" Click="Button_cancel_Click">
+            <Button x:Name="button_cancel" Content="Close" HorizontalAlignment="Right" Margin="0,0,80,22" VerticalAlignment="Bottom" Width="75" Click="BtnCloseClick">
                 <Button.Effect>
                     <DropShadowEffect BlurRadius="2" Opacity="0.65" ShadowDepth="1" Color="#FF8B8B8B"/>
                 </Button.Effect>
